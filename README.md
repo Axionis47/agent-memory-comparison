@@ -1,8 +1,12 @@
 # Agent memory comparison
 
-Five released memory mechanisms connected to the same AppWorld acting agent: Mem0, ACE, Trace2Skill, GEPA and RecMem, alongside a no-memory baseline.
+An engineering study built on the released work of Mem0, ACE, Trace2Skill, GEPA, RecMem and AppWorld. The purpose was to understand each memory mechanism by reading its code, connecting it to a real acting agent, exercising its native learning operations and inspecting what happened on actual tasks.
 
-The agent executes Python actions against applications, reads results and decides what to do next. Memory supplies knowledge learned from earlier experience. This project records what each mechanism learned, what reached the agent, the actions that followed, official task outcomes and execution expense.
+The memory algorithms, application environment, benchmark tasks, acting agent and evaluator already existed. The work here was bringing those pieces together: adapting task experience and feedback, connecting model providers, scheduling learning, supplying memory during action decisions, and measuring the resulting changes and outcomes. The [source and adaptation record](FIDELITY.md) and [upstream references](THIRD_PARTY.md) distinguish those responsibilities.
+
+The same AppWorld agent executes Python against applications, reads observations and decides what to do next. Each memory policy has its own store. A no-memory baseline provides the counterfactual. The study follows experience into saved knowledge, then into supplied context, executable actions and official results.
+
+Exercising a mechanism means providing real experience and its required learning opportunities. Empty updates, rejected instructions, irrelevant retrieval and failed tasks remain results. Activating a mechanism and demonstrating a useful effect are separate findings.
 
 ## Start with the code study
 

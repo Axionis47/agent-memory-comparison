@@ -3,7 +3,7 @@
   "files": {
     "EXPERIMENT.md": "74103783ade2b03ca3a2fe88a31c0c9239765e7839d50b22713d17c2ebbb0fd6",
     "FIDELITY.md": "451fb8f0ff3b96e6b0159ab1f038a924d312e1179acd97feea98902ea96c96e1",
-    "README.md": "1c84011614776b0945c373525cd67656c2356a2afd8aeab4cecc13f6e4b92516",
+    "README.md": "8f7f9c2fc77a4e4f465c92206b757280de1ff8c605239dbbfa5351c4738d9a34",
     "THIRD_PARTY.md": "a63c2f9ad57716ac9d89b49ac04d612c562100f4dd9a2380e2303d1ce170a500",
     "bootstrap.py": "143405624113d21ce83d33d1b1a7720a47d7dcb57c6f135778021e231a22d008",
     "docs/FINDINGS.md": "6d7a2ea52913e4d57bfd7d2ea269a0fcc1aa2d8cc548a2038f2d4184a37c512d",
@@ -43,6 +43,6 @@
     "third_party/skill_structure_validator/quick_validate.py": "ee6dba90f44d37171c5a6edb8095979c54919ff6822c1a907afca2e78c48738c",
     "tools/verify_release.py": "0d3c5146c45af2e86fcefa4604844b5124b80db7827cd59bb60a2e9c707e1433",
     ".gitignore": "3b29fa7c2632b7ace2b1e29a8836afb8e7a830d2d58fb8f0a964567f47e825a7",
-    "docs/CODE-STUDY.md": "4339d6a6dc33ce57e8b36070f2fcf8f8df5daeeb1631f9f2b9e4825ff0fb7fd9"
+    "docs/CODE-STUDY.md": "ef4998af842c869c2e6d65738d4a0f6106d0b3718866683e3b55531780b98533"
   }
 }

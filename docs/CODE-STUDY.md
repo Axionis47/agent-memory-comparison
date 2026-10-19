@@ -1,10 +1,46 @@
 # Code study and executed findings
 
-This project connected five released memory mechanisms to the same AppWorld acting agent and exercised them with real tasks and live Gemini calls. It produced a small measured pilot, concrete memory-and-action cases, and a GEPA instruction that survived selection, persistence and later exposure. It did not establish that every mechanism reliably improves the agent.
+The purpose of this study was to understand five existing memory mechanisms through their code and their behaviour inside a real acting agent. It builds on released implementations from Mem0, ACE, Trace2Skill, GEPA and RecMem, and on AppWorld's existing agent, applications, tasks and evaluator. Those projects supplied the underlying mechanisms and task environment.
 
-The engineering result is an inspectable connection between experience, saved knowledge, supplied context, executable actions and official outcomes. The code also exposed integration failures and limits of treating more memory as better execution.
+The contribution here was the integration and its evidence: mapping actual task experience into each implementation, preserving the meaning of answers and feedback, connecting live model calls, scheduling updates, exposing retained knowledge during action decisions, and tracing the resulting work. This produced a measured pilot, concrete memory-and-action cases, and a selected GEPA instruction that survived persistence and later exposure. It did not establish that every mechanism reliably improves the agent.
+
+The study connects three questions: what the native code does, what is required to make that mechanism execute in this environment, and whether the resulting knowledge is relevant to the agent's actions and task outcome. Integration failures and limits of agent execution are part of that explanation.
 
 The [task examples](FINDINGS.md) contain the case-level findings. [Pilot measurements](PILOT.md) contain the six-configuration scorecard. The [public action export](../evidence/cases.json) contains 37 selected task records from the later mechanism cases and their ancestry, not the full initial pilot population. Raw observations and application databases remain outside the public repository, so these exported outcome fields cannot independently regrade the original tasks.
+
+## What already existed and what was brought together
+
+| Existing work | What it provided | Work performed in this project |
+| --- | --- | --- |
+| Mem0, ACE, Trace2Skill, GEPA and RecMem | Released learning, reconciliation, consolidation, retrieval or instruction-selection implementations. | Read their call paths, invoke native components, adapt experience formats and learning schedules, and capture their mutations and outputs. |
+| AppWorld | Application state, tools, upstream tasks, an acting agent and an official evaluator. | Inject the measured model connection, observe execution, verify resets and saved final state, and keep the underlying task/evaluator logic. |
+| Gemini and the Google SDK | Generation, embeddings and token counting through Vertex. | Connect those calls to components expecting different client interfaces and record requests, usage, timing and uncertainty. |
+| Qdrant | Persistent vector storage and similarity search. | Configure separate namespaces and verify native store persistence and reopening. |
+| SQLite, OpenTelemetry and Pydantic | Structured storage, timing spans and interface validation. | Define experiment-specific records connecting task attempts, memory versions, exposures, tool calls and grades. |
+
+The project did not invent the five memory algorithms or independently implement them from first principles. It implemented the connections, task adaptations, controls and measurement around their released code. Those adaptations can change behaviour, so they are part of the system under study. The pinned sources and detailed changes are in [the adaptation record](../FIDELITY.md) and [upstream references](../THIRD_PARTY.md).
+
+## How the mechanisms were exercised
+
+The practical goal was to make native learning operations observable rather than assume that importing a library meant its mechanism had run. Each method needed an appropriate opportunity to process actual experience:
+
+| Mechanism | Opportunity supplied | Observable evidence and qualification |
+| --- | --- | --- |
+| Mem0 | Recorded API actions and observations, with source-supported feedback. | Native fact extraction and mutation records, persisted facts, and later retrieved content. Successful parsing alone did not establish factual correctness. |
+| ACE | A completed attempt, actual answer, separate evaluator feedback and the bullets exposed during that attempt. | Reflection, curator additions, counters, analyser invocation and revised playbooks. Invoking the analyser does not establish that a merge occurred on every update. |
+| Trace2Skill | Pools of actual trajectories, analysed into the native evolution input format. | Patch/evolution results, changed skill files, structural-validation results and later procedure exposure. Format validity did not establish executable correctness. |
+| GEPA | Actual candidate-testing attempts with a declared objective and diagnostic feedback. | Candidate acceptance/rejection, final selection, saved instructions and fresh attempts receiving the frozen strategy. An empty selected strategy remained a valid outcome. |
+| RecMem | Sequential experience arrivals using simulated application time. | Recurrence measurements, episode-merge decisions, layer changes and later search results. Six related arrivals did not mean six independent successful tasks. |
+
+Here, making a mechanism happen means supplying real experience and exercising its native trigger, not inserting a desired lesson or changing a failed outcome. The GEPA retention example required a separate known-case diagnostic after pass-only diagnostics retained empty strategies. Its completion-first, API-call-count-second metric is recorded explicitly. That change supports a retention demonstration, not a retrospective improvement claim for the original pilot.
+
+## How tasks connect the mechanisms to agent behaviour
+
+The same upstream task environment makes the memories concrete. A photo task exercises metadata, date interpretation and file moves. A spending task exercises relationship lookup, cross-application matching and pagination. The mechanism is inspected alongside the actual Python and the official final-state result.
+
+The initial pilot supplied common baseline-generated experience and compared the same evaluation tasks across configurations. The later cases inspected each policy's own experience and included separate checks and diagnostics. Their individual cases are not a second complete matched scorecard. The project therefore brings the tasks and mechanisms together through a common acting environment and evidence record while preserving the differences between those executed conditions.
+
+This is one integration study with separate memory policies. It did not combine all five into one hybrid memory architecture. Its findings concern how existing mechanisms behave after adaptation, which integration boundaries matter, and where retained knowledge did or did not translate into useful action.
 
 ## What was achieved
 
