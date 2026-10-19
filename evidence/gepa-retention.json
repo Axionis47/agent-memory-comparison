@@ -27,5 +27,147 @@
   "control_outcomes": [
     false,
     true
+  ],
+  "native_saved_candidates": [
+    {
+      "strategy": ""
+    },
+    {
+      "strategy": "When a task involves iterating through items (e.g., files, songs, requests) that might be modified or moved during the iteration, it's crucial to manage the list of items carefully.\n\nHere's a refined strategy:\n\n1. **Initial Listing:** Obtain a complete list of the items to be processed at the beginning of the task. Store not just their identifiers or paths, but also any relevant metadata (like creation dates, current paths, etc.) that will be needed for subsequent steps. This initial list represents the state of the world at the start of processing.\n\n2. **Process and Track Changes:**\n   - Iterate through this initial list.\n   - For each item, perform the required operations (e.g., rename, modify).\n   - Crucially, if an operation changes an item's identifier or path, immediately update your internal tracking of that item's *new* identifier/path.\n   - If an item needs to be processed further in a subsequent phase (e.g., moved to a different directory after renaming), add its *new* identifier/path to a separate list for that next phase.\n\n3. **Subsequent Operations on Updated List:** When performing a second phase of operations (e.g., moving files that were renamed in the first phase), iterate through the list of *updated* identifiers/paths generated in step 2. Do not re-query the system for the items unless absolutely necessary, as this can lead to inconsistencies if the system's state has changed due to your previous actions.\n\n**Applicability Conditions:**\nThis strategy is applicable when:\n- The task requires processing a collection of items.\n- Operations on these items might change their identifying attributes (like file paths or IDs).\n- Subsequent operations depend on the updated identifying attributes of the items.\n- The order of operations (e.g., rename then move) is important."
+    },
+    {
+      "strategy": "When a task involves iterating through items (e.g., files, songs, requests) that might be modified or moved during the iteration, it's crucial to manage the list of items carefully.\n\nHere's a refined strategy:\n\n1. **Initial Listing:** Obtain a complete list of the items to be processed at the beginning of the task. Store not just their identifiers or paths, but also any relevant metadata (like creation dates, current paths, etc.) that will be needed for subsequent steps. This initial list represents the state of the world at the start of processing.\n\n2. **Process and Track Changes:**\n   - Iterate through this initial list.\n   - For each item, perform the required operations (e.g., rename, modify).\n   - Crucially, if an operation changes an item's identifier or path, immediately update your internal tracking of that item's *new* identifier/path. If subsequent operations depend on the updated identifier/path, ensure this updated information is stored and used.\n\n3. **Subsequent Operations on Updated List:** When performing a second phase of operations (e.g., moving files that were renamed in the first phase), iterate through the list of *updated* identifiers/paths generated in step 2. Do not re-query the system for the items unless absolutely necessary, as this can lead to inconsistencies if the system's state has changed due to your previous actions. If the original list of items is used for subsequent operations after modifications, it will lead to errors because the original identifiers/paths may no longer exist.\n\n**Applicability Conditions:**\nThis strategy is applicable when:\n- The task requires processing a collection of items.\n- Operations on these items might change their identifying attributes (like file paths or IDs).\n- Subsequent operations depend on the updated identifying attributes of the items.\n- The order of operations (e.g., rename then move) is important."
+    }
+  ],
+  "native_acceptance_history": [
+    {
+      "i": 0,
+      "selected_program_candidate": 0,
+      "subsample_ids": [
+        0
+      ],
+      "n_tasks": 1,
+      "tasks": [
+        {
+          "parent_idx": 0,
+          "subsample_ids": [
+            0
+          ],
+          "subsample_scores": [
+            0.0
+          ],
+          "new_subsample_scores": [
+            0.0
+          ]
+        }
+      ],
+      "subsample_scores": [
+        0.0
+      ],
+      "new_subsample_scores": [
+        0.0
+      ]
+    },
+    {
+      "i": 1,
+      "selected_program_candidate": 0,
+      "subsample_ids": [
+        1
+      ],
+      "n_tasks": 1,
+      "tasks": [
+        {
+          "parent_idx": 0,
+          "subsample_ids": [
+            1
+          ],
+          "subsample_scores": [
+            1.0032051282051282
+          ],
+          "new_subsample_scores": [
+            1.0033112582781456
+          ]
+        }
+      ],
+      "subsample_scores": [
+        1.0032051282051282
+      ],
+      "new_subsample_scores": [
+        1.0033112582781456
+      ],
+      "new_program_idx": 1,
+      "new_program_indices": [
+        1
+      ],
+      "evaluated_val_indices": [
+        0,
+        1
+      ]
+    },
+    {
+      "i": 2,
+      "invoked_merge": true,
+      "selected_program_candidate": 1,
+      "subsample_ids": [
+        0
+      ],
+      "n_tasks": 1,
+      "tasks": [
+        {
+          "parent_idx": 1,
+          "subsample_ids": [
+            0
+          ],
+          "subsample_scores": [
+            1.0138888888888888
+          ],
+          "new_subsample_scores": [
+            0.0
+          ]
+        }
+      ],
+      "subsample_scores": [
+        1.0138888888888888
+      ],
+      "new_subsample_scores": [
+        0.0
+      ]
+    },
+    {
+      "i": 3,
+      "selected_program_candidate": 1,
+      "subsample_ids": [
+        1
+      ],
+      "n_tasks": 1,
+      "tasks": [
+        {
+          "parent_idx": 1,
+          "subsample_ids": [
+            1
+          ],
+          "subsample_scores": [
+            1.0032467532467533
+          ],
+          "new_subsample_scores": [
+            1.0033333333333334
+          ]
+        }
+      ],
+      "subsample_scores": [
+        1.0032467532467533
+      ],
+      "new_subsample_scores": [
+        1.0033333333333334
+      ],
+      "new_program_idx": 2,
+      "new_program_indices": [
+        2
+      ],
+      "evaluated_val_indices": [
+        0,
+        1
+      ]
+    }
   ]
 }

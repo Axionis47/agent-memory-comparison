@@ -4,6 +4,10 @@ Five released memory mechanisms connected to the same AppWorld acting agent: Mem
 
 The agent executes Python actions against applications, reads results and decides what to do next. Memory supplies knowledge learned from earlier experience. This project records what each mechanism learned, what reached the agent, the actions that followed, official task outcomes and execution expense.
 
+## Start with the code study
+
+Read the [code study and executed findings](docs/CODE-STUDY.md) for the implementation walkthrough: what the released algorithms do, what the adapters change, how learning reaches actions, which defects were repaired, and what the executed evidence supports. It is the main explanation of the project. The [task examples](docs/FINDINGS.md) supply the concrete cases and costs.
+
 ## Measured work
 
 - **Pilot comparison:** 71 official grades across 72 evaluation cells and 77 actual attempts. One cell remained inconclusive. GEPA retained an empty strategy in this pilot.
