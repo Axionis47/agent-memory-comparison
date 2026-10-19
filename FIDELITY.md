@@ -1,0 +1,49 @@
+# Released components and executed adaptations
+
+The table below describes the initial measured pilot. The later executed mechanism cases used the additional adaptations listed at the end. These settings describe different recorded runs and must not be mixed into one comparison.
+
+This pilot compares complete memory policies on one upstream acting agent. It is not a reproduction of paper scores. Native algorithms and local adapters have separate responsibilities.
+
+The code in mc/ is experiment-specific integration, measurement and reporting. Its SQLite ledger, OpenTelemetry exporter, context packing, state checks and error summaries are local code. They do not replace the released memory algorithms or the upstream agent/evaluator, and are not a general evaluation framework.
+
+| Component | Reused implementation | Local adaptation |
+| --- | --- | --- |
+| Agent/environment/grader | AppWorld 42b5bcf3cd334fee33f0c37c02070a9f5807add5, SimplifiedReActCodeAgent | One constructor expression accepts an injected live Vertex model. Subclass initialization observes native batch execution; the upstream action/observation loop and code extraction are unchanged. Common context slot and public-output guard apply to every arm. |
+| Mem0 | mem0ai 1.0.0 Python Memory.add/search, released extraction/update algorithms, Qdrant and native history | Registered generation and embedding providers invoke the common Google SDK boundary. Extraction instructions target reusable API facts instead of personal preferences. Each actual training turn is an arrival. |
+| ACE | ace-agent/ace 82709de050e1db6e6ef2f07bcb0393560b94992a, Reflector.reflect, Curator.curate and playbook_utils | Replace only provider transport with actual Vertex calls. Use observable execution records, official outcome feedback and no reference solution/private reasoning. The released merger supports a narrower operation set than the full paper; report actual operations rather than claiming omitted mechanisms ran. |
+| Trace2Skill | Qwen-Applications/Trace2Skill 3d0b52a140f002a512930252b613c49048f7d5ac, ParallelSkillEvolver map/reduce/apply/validate | A local AppWorld trace-to-record analysis replaces the authors' spreadsheet inspection agent. Native generic record schema and actual skill evolution core are used. max_workers=1 preserves serial calls. Skill files are supplied as instructions, with no extra runtime tools. |
+| GEPA | gepa 0.1.4 optimize and GEPAAdapter | Actual AppWorld candidate rollouts, official 0/1 completion, observable traces and the common Vertex reflection model. One editable strategy slot. The native optimizer has a 12-metric-call stopping target and can finish an in-flight batch beyond that target. Protocol v2 used 12 actual selection rollouts; the contaminated v1 attempt used 14. Every actual rollout is recorded and charged. No fabricated candidate scores. |
+| RecMem | CaiusDai/RecMem a84252f6e5587fd4a8caac03ec9f6c732b7a7f35, RecMem.add_memory/search_memories and all three native layers | Inject maintained Google generation/embedding clients through released extension interfaces. Use exact cosine search with frozen pilot parameters: recurrence count 5, similarity .7, episode merge .7, retrieval top-k 10/5/10 and semantic threshold 0. The released evaluation CLI instead defaults to count 6 and episode merge .75. These pilot parameter choices and the changed embedding model are adaptations, not calibrated equivalence to the paper. Zero consolidation is valid. |
+
+Gemini 2.5 Flash, temperature 0, thinking budget 0, no generated-answer cache, identical output/watchdog/context entitlements. Gemini Embedding 001 returns 1536-dimensional vectors for native store compatibility. Index similarity thresholds are frozen pilot defaults, not tuned to held-out outcomes.
+
+Qdrant performs native similarity lookup for Mem0 and RecMem. ACE supplies its playbook; Trace2Skill supplies the evolved procedure; GEPA supplies selected instructions. SQLite measures these mechanisms and does not replace their stores. Author-provided transport retry loops are bypassed by a single-attempt shared Google transport. Operational failures remain inconclusive and retain unknown cost reservations.
+
+Retrieval happens once at task start, using the task instruction. The selected context remains available on every subsequent generation in that task. This pilot does not compare step-adaptive retrieval, within-task memory updates or additional memory tools. All six configurations retain the upstream agent's application tools.
+
+Model quality is evidenced only by fresh live calls. Software metadata/store tests are not model evidence. Exact installed versions are in requirements.lock; frozen source, code, dataset and memory hashes are in results/freeze.json after construction succeeds.
+
+Runtime compatibility: use upstream source (PyPI AppWorld requires incompatible Pydantic 1), Python 3.12.8, Pydantic 2.12.5, FastAPI 0.121.1 and Starlette 0.49.3. Task data/native worlds live in a deterministic `/private/tmp/basis-mc01-*` directory because upstream classifies paths using the substring `memory`. The first zero-action smoke failure is retained. No task, API or grader implementation is modified by this workaround.
+
+SQLAlchemy 2.1.5 also percent-encodes the `file:` prefix used by AppWorld's named in-memory database URI. Database.home_path then differs from the key used to persist grading metadata. This produced empty saved model-hash metadata and disagreements on regrading. Protocol v2 pins SQLAlchemy 2.0.44, asserts identity equality before action, fingerprints the actual final world and independently verifies every saved application database. Official grading uses the unchanged evaluate_task function in a fresh subprocess. The entire earlier cohort, including its learning artifacts and source snapshot, is retained as contaminated integration evidence and excluded from comparison. All shared traces and memories are rebuilt under the corrected boundary.
+
+Shared-trace ACE does not credit helpful/harmful usage to bullets that the baseline never received. It uses the authors' required empty section template. Native file logging is redirected to ledger events. Trace2Skill's optional quick_validate.py is absent from its release; the native engine reports that validation as skipped, and freeze separately checks YAML metadata and local reference integrity. No original validation success is invented.
+
+RecMem's system-only generation requests require a neutral user turn for Vertex; this provider-format normalization adds no task facts. An initial pre-dispatch SDK validation rejection and the checkpoint recovery of four confirmed arrivals are retained. Raw/episodic/semantic state is checked before resuming. Context packing uses the SDK's text tokenizer vocabulary, not local inference weights, and actual provider counts confirm delivered text.
+
+Qdrant's cosine normalization can change the in-memory floating-point representation after reopening. Canonical RecMem checksums therefore cover persisted vector originals, not transient normalized arrays. Recovery verifies those originals against the hashes of actual live embedding outputs and checks all point IDs and payloads. This changes measurement identity only, not retrieval or learning.
+
+Mem0 requires on_disk=True: its default local-store constructor deletes an existing path. The freeze guard caught the omitted persistence flag before evaluation. Saved fact artifacts and native history preserve all learned content. The derived index is rebuilt with the original fact IDs/metadata and fresh, recorded embeddings, without regenerating facts or rerunning task outcomes. Rebuild costs are included and separately counted; a populated reopen test protects this boundary.
+
+RecMem's public retrieval result contains content and score, without point IDs. The frozen adapter's first-match UUID lookup is ambiguous when stored points have identical text. Reconciliation records exact identities from frozen version, layer and content hash, with position and every candidate native point ID. A physical point ID remains unknown when several points match. Original lookup records remain retained and labelled; no delivered text, retrieval choice or task outcome changes. The later adapter captures native point IDs before the public API removes them.
+
+
+## Later executed mechanism cases
+
+The later AppWorld cases used per-action retrieval from task instructions and the latest observable action/result, plus a common FTS5 tool-search stage. Each configuration learned its own actual practice experience. Mem0 required source-supported observations and supplied actual supporting trajectories with feedback. ACE separated completion answers from evaluator feedback, maintained its bullet counter, and invoked the native similarity analyser with Vertex embeddings at threshold 0.90.
+
+Trace2Skill's native validation hook used the bundled pinned structural validator. This checks skill format, not the authors' behavioural evaluation. RecMem used recurrence count 6 and episode-merge threshold 0.75, with native retrieval identities captured before content-only conversion. Recurrence counts related arrivals rather than independent tasks.
+
+The separate GEPA diagnostic selected candidate 2 after 14 actual candidate-testing task attempts, persisted and reopened its instruction, then executed two frozen-memory follow-ups and two empty-memory controls. Its declared score prioritised official completion, then API-call count. These known-case results are distinct from the earlier pilot's empty GEPA strategy.
+
+The main learning-copy redactor missed standalone simulated-password observations. That input defect remained in the original evidence; the separate GEPA diagnostic added a process-local repair. The public reports omit credential values. The original ledgers and native state are not included in this source snapshot.

@@ -1,0 +1,31 @@
+{
+  "diagnostic_id": "GEPA-retention-diagnostic-v3",
+  "scope": "known-case retention demonstration; train equals validation; not generalisation",
+  "metric": "success * (1 + 1 / (N * (1 + actual_api_calls))), N=2; failed task score is 0",
+  "native_acceptance": "unchanged strict improvement",
+  "instruction": "When a task involves iterating through items (e.g., files, songs, requests) that might be modified or moved during the iteration, it's crucial to manage the list of items carefully.\n\nHere's a refined strategy:\n\n1. **Initial Listing:** Obtain a complete list of the items to be processed at the beginning of the task. Store not just their identifiers or paths, but also any relevant metadata (like creation dates, current paths, etc.) that will be needed for subsequent steps. This initial list represents the state of the world at the start of processing.\n\n2. **Process and Track Changes:**\n   - Iterate through this initial list.\n   - For each item, perform the required operations (e.g., rename, modify).\n   - Crucially, if an operation changes an item's identifier or path, immediately update your internal tracking of that item's *new* identifier/path. If subsequent operations depend on the updated identifier/path, ensure this updated information is stored and used.\n\n3. **Subsequent Operations on Updated List:** When performing a second phase of operations (e.g., moving files that were renamed in the first phase), iterate through the list of *updated* identifiers/paths generated in step 2. Do not re-query the system for the items unless absolutely necessary, as this can lead to inconsistencies if the system's state has changed due to your previous actions. If the original list of items is used for subsequent operations after modifications, it will lead to errors because the original identifiers/paths may no longer exist.\n\n**Applicability Conditions:**\nThis strategy is applicable when:\n- The task requires processing a collection of items.\n- Operations on these items might change their identifying attributes (like file paths or IDs).\n- Subsequent operations depend on the updated identifying attributes of the items.\n- The order of operations (e.g., rename then move) is important.",
+  "memory_version": "55ce8a7f698def271ab666bb2e5350f76e8061d0505d7a6d39a5c5fb36b48640",
+  "best_candidate_index": 2,
+  "candidate_testing_task_attempts": 14,
+  "candidate_validation_mean_scores": [
+    0.5016233766233766,
+    0.5016339869281046,
+    1.0078669536695366
+  ],
+  "follow_up_runs": [
+    "74192ba79bfc486f94576685fba17bfa",
+    "646cde1b87834a478070da8b8f3ac405"
+  ],
+  "control_runs": [
+    "40c1ca82b53c4ea386a105d2f2c905f8",
+    "0f470b6b6d0e4854959fd7d1d81891d8"
+  ],
+  "follow_up_outcomes": [
+    true,
+    true
+  ],
+  "control_outcomes": [
+    false,
+    true
+  ]
+}

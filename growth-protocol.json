@@ -1,0 +1,60 @@
+{
+  "id": "MC02",
+  "version": 3,
+  "seed": "memory-growth-v1",
+  "arms": [
+    "baseline",
+    "mem0",
+    "ace",
+    "trace2skill",
+    "gepa",
+    "recmem"
+  ],
+  "checkpoints": [
+    6,
+    12,
+    24
+  ],
+  "practice_tasks": 24,
+  "evaluation_tasks": 8,
+  "repetitions": 2,
+  "project": "YOUR_GOOGLE_CLOUD_PROJECT",
+  "location": "global",
+  "model": "gemini-2.5-flash",
+  "embedding_model": "gemini-embedding-001",
+  "embedding_dimension": 1536,
+  "temperature": 0,
+  "thinking_budget": 0,
+  "max_output_tokens": 16384,
+  "max_steps_watchdog": 60,
+  "memory_tokens": 8192,
+  "tool_definition_tokens": 8192,
+  "tool_search_limit": 8,
+  "gepa_metric_calls": 48,
+  "estimated_cost_guard_usd": 30,
+  "ace_similarity": 0.9,
+  "recmem": {
+    "min_consolidation_cnt": 6,
+    "min_relevant_score": 0.7,
+    "merge_with_epi_thresh": 0.75,
+    "retrieve_raw_topk": 10,
+    "retrieve_epi_topk": 5,
+    "semantic_memory_topk": 10,
+    "semantic_memory_threshold": 0
+  },
+  "pricing": {
+    "checked": "2026-10-18",
+    "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    "input_per_million": 0.3,
+    "cached_input_per_million": 0.03,
+    "output_per_million": 2.5,
+    "embedding_per_million": 0.15
+  },
+  "structural_validator": {
+    "source": "Bundled OpenAI skill-creator quick_validate.py, Apache-2.0",
+    "path": ".cache/vendor/mc02-validation/quick_validate.py",
+    "sha256": "ee6dba90f44d37171c5a6edb8095979c54919ff6822c1a907afca2e78c48738c",
+    "semantics": "Skill structure only, not behavioral correctness"
+  },
+  "tool_query_contract": "zero to eight single-keyword terms, joined into one FTS query; schema constrained generation"
+}

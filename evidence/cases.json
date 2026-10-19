@@ -1,0 +1,2935 @@
+{
+  "export_kind": "sanitised derivative of recorded live task attempts",
+  "excluded": [
+    "raw observations",
+    "SDK requests and responses",
+    "authentication values",
+    "application databases",
+    "reference solutions"
+  ],
+  "limitation": "Official results are exported ledger values. Raw databases are withheld, so these exports alone cannot independently regrade the original attempts.",
+  "runs": [
+    {
+      "run_id": "00b401b0511d4573a3e42d336574d09a",
+      "task_id": "34d9492_1",
+      "architecture": "gepa",
+      "phase": "smoke_selection",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 130,
+      "memory_version": "38b853191efbab2ce203ea6c51ab5e63d894801662032b977614574a09b1d191",
+      "sdk_requests": 23,
+      "generation_requests": 12,
+      "known_estimated_usd": 0.0144805,
+      "unknown_cost_requests": 0,
+      "task_seconds": 21.54046200000448,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "from datetime import datetime\ncurrent_year = datetime.now().year\nprint(current_year)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "files_in_vacations = apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/', entry_type='files')\nprint(files_in_vacations)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next(item for item in passwords if item[\"account_name\"] == \"file_system\")[\"password\"]\nfile_system_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nfile_system_access_token = file_system_login_result['access_token']\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "files_in_vacations = apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/', entry_type='files')\nprint(files_in_vacations)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "from datetime import datetime\nimport os\n\nvacation_mapping = {\n    2: \"Petra\",\n    3: \"Budapest\"\n}\ndestination_base_path = '~/photographs/vacations/'\n\nfor file_path in files_in_vacations:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at = datetime.fromisoformat(file_details['created_at'])\n\n    if created_at.year == current_year and created_at.month in vacation_mapping:\n        vacation_name = vacation_mapping[created_at.month]\n    else:\n        vacation_name = \"Amsterdam\"\n\n    destination_directory = os.path.join(destination_base_path, vacation_name)\n    apis.file_system.create_directory(access_token=file_system_access_token, directory_path=destination_directory, allow_if_exists=True)\n\n    file_name = os.path.basename(file_path)\n    destination_file_path = os.path.join(destination_directory, file_name)\n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_file_path)\n\nprint(\"Files organized successfully.\")"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "d8fe7c84a3b3d0eff2fed3c02cbaed2903c8279013f235e55e1e9827be08a2b0"
+    },
+    {
+      "run_id": "0145d77a0329485d95c85cc6399cada4",
+      "task_id": "34d9492_1",
+      "architecture": "gepa",
+      "phase": "smoke_selection",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 137,
+      "memory_version": "2a01bc6482b3cfe1680fe14e95d9dfc91c19236a4ce9d49a9b7b49323486286b",
+      "sdk_requests": 50,
+      "generation_requests": 26,
+      "known_estimated_usd": 0.04159851,
+      "unknown_cost_requests": 0,
+      "task_seconds": 79.25633999996353,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.file_system.show_directory(access_token='[AUTH REDACTED]', directory_path='~/photographs/vacations/', entry_type='files'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='supervisor', api_name='show_account_passwords'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\"), None)\nprint(file_system_password)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "file_system_access_token = file_system_password\nprint(apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/', entry_type='files'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "file_system_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nfile_system_access_token = file_system_login_result['access_token']\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "import datetime\n\nfile_system_access_token = \"[AUTH REDACTED]\"\nvacation_files = apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/', entry_type='files')\nprint(vacation_files)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "import datetime\n\ncurrent_year = datetime.datetime.now().year\nprint(current_year)"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "import os\nimport datetime\n\nfile_system_access_token = \"[AUTH REDACTED]\"\nvacation_files = [\n \"/home/paul/photographs/vacations/img_02237d7.jpg\",\n \"/home/paul/photographs/vacations/img_0d36b21.jpeg\",\n \"/home/paul/photographs/vacations/img_0e15e48.jpg\",\n \"/home/paul/photographs/vacations/img_164a3fe.jpeg\",\n \"/home/paul/photographs/vacations/img_16b39ad.png\",\n \"/home/paul/photographs/vacations/img_18b06cc.png\",\n \"/home/paul/photographs/vacations/img_1a2b16d.jpeg\",\n \"/home/paul/photographs/vacations/img_254fbd9.jpg\",\n \"/home/paul/photographs/vacations/img_26cb65d.png\",\n \"/home/paul/photographs/vacations/img_29f19c8.jpg\",\n \"/home/paul/photographs/vacations/img_2dbefae.png\",\n \"/home/paul/photographs/vacations/img_2ecf83d.jpeg\",\n \"/home/paul/photographs/vacations/img_301305f.jpg\",\n \"/home/paul/photographs/vacations/img_32dc30d.jpeg\",\n \"/home/paul/photographs/vacations/img_44361f7.jpeg\",\n \"/home/paul/photographs/vacations/img_4d1aafc.jpeg\",\n \"/home/paul/photographs/vacations/img_4d7f44a.jpeg\",\n \"/home/paul/photographs/vacations/img_537a8a3.png\",\n \"/home/paul/photographs/vacations/img_5c2f56b.jpeg\",\n \"/home/paul/photographs/vacations/img_62679d2.jpeg\",\n \"/home/paul/photographs/vacations/img_6a1d6f6.jpeg\",\n \"/home/paul/photographs/vacations/img_6a74f01.jpeg\",\n \"/home/paul/photographs/vacations/img_6d078f8.jpg\",\n \"/home/paul/photographs/vacations/img_750c944.jpeg\",\n \"/home/paul/photographs/vacations/img_799a654.jpeg\",\n \"/home/paul/photographs/vacations/img_7e6273e.png\",\n \"/home/paul/photographs/vacations/img_846760e.jpg\",\n \"/home/paul/photographs/vacations/img_8df984b.png\",\n \"/home/paul/photographs/vacations/img_8f8933a.jpeg\",\n \"/home/paul/photographs/vacations/img_a1640a1.png\",\n \"/home/paul/photographs/vacations/img_a46cf01.jpg\",\n \"/home/paul/photographs/vacations/img_a5da8e1.png\",\n \"/home/paul/photographs/vacations/img_abab143.png\",\n \"/home/paul/photographs/vacations/img_b70df1d.png\",\n \"/home/paul/photographs/vacations/img_c1d84e4.jpeg\",\n \"/home/paul/photographs/vacations/img_d77a00c.png\",\n \"/home/paul/photographs/vacations/img_da771fe.jpeg\",\n \"/home/paul/photographs/vacations/img_ede9877.jpeg\",\n \"/home/paul/photographs/vacations/img_f1ac2b4.jpg\",\n \"/home/paul/photographs/vacations/img_f24e638.jpeg\",\n \"/home/paul/photographs/vacations/img_f8dd7c3.jpeg\",\n \"/home/paul/photographs/vacations/img_fcc5ff7.jpeg\"\n]\ncurrent_year = 2023\n\nfor file_path in vacation_files:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at_timestamp = file_details['created_at']\n    created_at_datetime = datetime.datetime.fromisoformat(created_at_timestamp.replace('Z', '+00:00'))\n\n    destination_folder = \"\"\n    if created_at_datetime.year == current_year:\n        if created_at_datetime.month == 2:\n            destination_folder = \"Petra\"\n        elif created_at_datetime.month == 3:\n            destination_folder = \"Budapest\"\n        else:\n            destination_folder = \"Amsterdam\"\n    else:\n        destination_folder = \"Amsterdam\" # Assuming all other files are from Amsterdam\n\n    destination_directory_path = f\"~/photographs/vacations/{destination_folder}\"\n    apis.file_system.create_directory(access_token=file_system_access_token, directory_path=destination_directory_path, recursive=True, allow_if_exists=True)\n\n    file_name = os.path.basename(file_path)\n    destination_file_path = os.path.join(destination_directory_path, file_name)\n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_file_path)\n\nprint(\"Files organized successfully.\")"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "file_system_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nfile_system_access_token = file_system_login_result['access_token']\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "import os\nimport datetime\n\nfile_system_access_token = \"[AUTH REDACTED]\"\nvacation_files = [\n \"/home/paul/photographs/vacations/img_02237d7.jpg\",\n \"/home/paul/photographs/vacations/img_0d36b21.jpeg\",\n \"/home/paul/photographs/vacations/img_0e15e48.jpg\",\n \"/home/paul/photographs/vacations/img_164a3fe.jpeg\",\n \"/home/paul/photographs/vacations/img_16b39ad.png\",\n \"/home/paul/photographs/vacations/img_18b06cc.png\",\n \"/home/paul/photographs/vacations/img_1a2b16d.jpeg\",\n \"/home/paul/photographs/vacations/img_254fbd9.jpg\",\n \"/home/paul/photographs/vacations/img_26cb65d.png\",\n \"/home/paul/photographs/vacations/img_29f19c8.jpg\",\n \"/home/paul/photographs/vacations/img_2dbefae.png\",\n \"/home/paul/photographs/vacations/img_2ecf83d.jpeg\",\n \"/home/paul/photographs/vacations/img_301305f.jpg\",\n \"/home/paul/photographs/vacations/img_32dc30d.jpeg\",\n \"/home/paul/photographs/vacations/img_44361f7.jpeg\",\n \"/home/paul/photographs/vacations/img_4d1aafc.jpeg\",\n \"/home/paul/photographs/vacations/img_4d7f44a.jpeg\",\n \"/home/paul/photographs/vacations/img_537a8a3.png\",\n \"/home/paul/photographs/vacations/img_5c2f56b.jpeg\",\n \"/home/paul/photographs/vacations/img_62679d2.jpeg\",\n \"/home/paul/photographs/vacations/img_6a1d6f6.jpeg\",\n \"/home/paul/photographs/vacations/img_6a74f01.jpeg\",\n \"/home/paul/photographs/vacations/img_6d078f8.jpg\",\n \"/home/paul/photographs/vacations/img_750c944.jpeg\",\n \"/home/paul/photographs/vacations/img_799a654.jpeg\",\n \"/home/paul/photographs/vacations/img_7e6273e.png\",\n \"/home/paul/photographs/vacations/img_846760e.jpg\",\n \"/home/paul/photographs/vacations/img_8df984b.png\",\n \"/home/paul/photographs/vacations/img_8f8933a.jpeg\",\n \"/home/paul/photographs/vacations/img_a1640a1.png\",\n \"/home/paul/photographs/vacations/img_a46cf01.jpg\",\n \"/home/paul/photographs/vacations/img_a5da8e1.png\",\n \"/home/paul/photographs/vacations/img_abab143.png\",\n \"/home/paul/photographs/vacations/img_b70df1d.png\",\n \"/home/paul/photographs/vacations/img_c1d84e4.jpeg\",\n \"/home/paul/photographs/vacations/img_d77a00c.png\",\n \"/home/paul/photographs/vacations/img_da771fe.jpeg\",\n \"/home/paul/photographs/vacations/img_ede9877.jpeg\",\n \"/home/paul/photographs/vacations/img_f1ac2b4.jpg\",\n \"/home/paul/photographs/vacations/img_f24e638.jpeg\",\n \"/home/paul/photographs/vacations/img_f8dd7c3.jpeg\",\n \"/home/paul/photographs/vacations/img_fcc5ff7.jpeg\"\n]\ncurrent_year = 2023\n\nfor file_path in vacation_files:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at_timestamp = file_details['created_at']\n    created_at_datetime = datetime.datetime.fromisoformat(created_at_timestamp.replace('Z', '+00:00'))\n\n    destination_folder = \"\"\n    if created_at_datetime.year == current_year:\n        if created_at_datetime.month == 2:\n            destination_folder = \"Petra\"\n        elif created_at_datetime.month == 3:\n            destination_folder = \"Budapest\"\n        else:\n            destination_folder = \"Amsterdam\"\n    else:\n        destination_folder = \"Amsterdam\" # Assuming all other files are from Amsterdam\n\n    destination_directory_path = f\"~/photographs/vacations/{destination_folder}\"\n    apis.file_system.create_directory(access_token=file_system_access_token, directory_path=destination_directory_path, recursive=True, allow_if_exists=True)\n\n    file_name = os.path.basename(file_path)\n    destination_file_path = os.path.join(destination_directory_path, file_name)\n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_file_path)\n\nprint(\"Files organized successfully.\")"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "d9846b6858e8ef1889bc7a4c69157933110189a5941a1285f80368a753ec8d59"
+    },
+    {
+      "run_id": "08cc00f347674ca8ac3fcbbe3bcc80f4",
+      "task_id": "d0b1f43_1",
+      "architecture": "ace",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 21,
+      "memory_version": "41b92fc8407b6de7a519f4eaa73f02f42851c7948d2d6b7e1844302a3607d3c2",
+      "sdk_requests": 52,
+      "generation_requests": 26,
+      "known_estimated_usd": 0.03469635,
+      "unknown_cost_requests": 0,
+      "task_seconds": 40.29850400000578,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.phone.get_current_date_and_time())"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nvenmo_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"venmo\"), None)\nprint(venmo_password)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "venmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nprint(venmo_login_result)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='phone'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='search_contacts'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "phone_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"phone\"), None)\nprint(phone_password)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "phone_login_result = apis.phone.login(username='8506051563', password=phone_password)\nphone_access_token = phone_login_result[\"access_token\"]\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "roommates = []\npage_index = 0\nwhile True:\n    roommate_page = apis.phone.search_contacts(access_token=phone_access_token, relationship='roommate', page_index=page_index)\n    if roommate_page:\n        roommates.extend(roommate_page)\n        page_index += 1\n    else:\n        break\nprint(roommates)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_transactions'))"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "total_sent_to_roommates = 0.0\nvenmo_access_token = venmo_login_result[\"access_token\"]\nfor roommate in roommates:\n    roommate_email = roommate[\"email\"]\n    page_index = 0\n    while True:\n        transactions_page = apis.venmo.show_transactions(\n            access_token=venmo_access_token,\n            user_email=roommate_email,\n            min_created_at='2023-01-01',\n            direction='sent',\n            page_index=page_index\n        )\n        if transactions_page:\n            for transaction in transactions_page:\n                total_sent_to_roommates += transaction[\"amount\"]\n            page_index += 1\n        else:\n            break\nprint(total_sent_to_roommates)"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=total_sent_to_roommates)"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "383aaaa652be303bce05eb467c5e0da6f3e4b31ef4c3463111185fc0d6fc7c91"
+    },
+    {
+      "run_id": "0f470b6b6d0e4854959fd7d1d81891d8",
+      "task_id": "68ee2c9_2",
+      "architecture": "gepa",
+      "phase": "retention_v3_control",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 156,
+      "memory_version": "49726a1d5fd6c6925dee5945580e008b0f39e1a6e739efb2a27edceb62c861e7",
+      "sdk_requests": 30,
+      "generation_requests": 22,
+      "known_estimated_usd": 0.0278267,
+      "unknown_cost_requests": 0,
+      "task_seconds": 34.71812599996338,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next(account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\")\nprint(file_system_password)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nfile_system_access_token = login_result['access_token']\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='list_files'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_directory'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "downloaded_files = apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/downloaded_files/', entry_type='files')\nprint(downloaded_files)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='move_file'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='get_current_date_and_time'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "from datetime import datetime\ncurrent_date_time = apis.phone.get_current_date_and_time()\ncurrent_year = datetime.strptime(current_date_time['date'], '%Y-%m-%d').year\n\nfor file_path in downloaded_files:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at = datetime.strptime(file_details['created_at'], '%Y-%m-%dT%H:%M:%S')\n    \n    # Rename the file\n    file_name = file_path.split('/')[-1]\n    directory_path = '/'.join(file_path.split('/')[:-1])\n    new_file_name = f\"{created_at.strftime('%Y_%m_%d')}-{file_name}\"\n    new_file_path = f\"{directory_path}/{new_file_name}\"\n    \n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=new_file_path)\n    \n    # Move files not from this year to recycle_bin\n    if created_at.year != current_year:\n        recycle_bin_path = f\"~/recycle_bin/{new_file_name}\"\n        apis.file_system.move_file(access_token=file_system_access_token, source_file_path=new_file_path, destination_file_path=recycle_bin_path)\n\napis.supervisor.complete_task()"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "from datetime import datetime\ncurrent_date_time = apis.phone.get_current_date_and_time()\ncurrent_year = datetime.strptime(current_date_time['date'], '%A, %B %d, %Y').year\n\nfor file_path in downloaded_files:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at = datetime.strptime(file_details['created_at'], '%Y-%m-%dT%H:%M:%S')\n    \n    # Rename the file\n    file_name = file_path.split('/')[-1]\n    directory_path = '/'.join(file_path.split('/')[:-1])\n    new_file_name = f\"{created_at.strftime('%Y_%m_%d')}-{file_name}\"\n    new_file_path = f\"{directory_path}/{new_file_name}\"\n    \n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=new_file_path)\n    \n    # Move files not from this year to recycle_bin\n    if created_at.year != current_year:\n        recycle_bin_path = f\"~/recycle_bin/{new_file_name}\"\n        apis.file_system.move_file(access_token=file_system_access_token, source_file_path=new_file_path, destination_file_path=recycle_bin_path)\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "577ffe603c80c82132a98970728008c70c9e91565955799965d3e9222502ba31"
+    },
+    {
+      "run_id": "15378a25ce7b4856be933368a897fde1",
+      "task_id": "34d9492_1",
+      "architecture": "gepa",
+      "phase": "smoke_selection",
+      "status": "conclusive",
+      "official_success": false,
+      "appworld_api_calls": 93,
+      "memory_version": "84ed2a0f83ef94223217923d645a4401ca06746715551723b2b1b761ea40c11d",
+      "sdk_requests": 19,
+      "generation_requests": 10,
+      "known_estimated_usd": 0.01266294,
+      "unknown_cost_requests": 0,
+      "task_seconds": 21.439362000033725,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next(account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\")\nlogin_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "file_system_access_token = login_result[\"access_token\"]\nvacations_directory_path = \"~/photographs/vacations/\"\nfiles_in_vacations = apis.file_system.show_directory(access_token=file_system_access_token, directory_path=vacations_directory_path, entry_type='files')\nprint(files_in_vacations)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "from datetime import datetime\n\npetra_dir = \"~/photographs/vacations/Petra/\"\nbudapest_dir = \"~/photographs/vacations/Budapest/\"\namsterdam_dir = \"~/photographs/vacations/Amsterdam/\"\n\n# Create destination directories\napis.file_system.create_directory(access_token=file_system_access_token, directory_path=petra_dir, recursive=True, allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path=budapest_dir, recursive=True, allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path=amsterdam_dir, recursive=True, allow_if_exists=True)\n\nfor file_path in files_in_vacations:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at = datetime.fromisoformat(file_details['created_at'])\n    \n    destination_path = \"\"\n    if created_at.month == 2:  # February\n        destination_path = petra_dir + file_path.split('/')[-1]\n    elif created_at.month == 3:  # March\n        destination_path = budapest_dir + file_path.split('/')[-1]\n    else:\n        destination_path = amsterdam_dir + file_path.split('/')[-1]\n        \n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_path)\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "094c18cf7270dc617f4d54d6fceb1d726e593fd8d7e856a0e1043cb4e0daa791"
+    },
+    {
+      "run_id": "30a65c9c7b604658aadb67828054cc71",
+      "task_id": "e85d92a_3",
+      "architecture": "mem0",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 5,
+      "memory_version": "60fb0b39edc0097764cba3bcf6a0df2516931587bf561f779174753290f12681",
+      "sdk_requests": 24,
+      "generation_requests": 10,
+      "known_estimated_usd": 0.01711915,
+      "unknown_cost_requests": 0,
+      "task_seconds": 20.349875000014435,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_artists'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "artists = apis.spotify.search_artists(query='Jasper Skye')\nprint(artists)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_songs'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "songs = apis.spotify.search_songs(artist_id=3, sort_by='-play_count', page_limit=1)\nprint(songs)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=\"Chasing Echoes in the Rain\")"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "fdd3b37f0a9a2a43fe53aed144c74a21f123e24a3754e4866dcc1e6acb3c1039"
+    },
+    {
+      "run_id": "30e9c79aa6b1465cb90cc5e467924e55",
+      "task_id": "34d9492_1",
+      "architecture": "trace2skill",
+      "phase": "smoke",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 92,
+      "memory_version": "5ab484aa2f127967488f49838ec5a32fd1b12734a69dc3499c5ea9ce073cd117",
+      "sdk_requests": 21,
+      "generation_requests": 14,
+      "known_estimated_usd": 0.0153528,
+      "unknown_cost_requests": 0,
+      "task_seconds": 42.96867500001099,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "from datetime import datetime\ncurrent_year = datetime.now().year\nprint(current_year)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next(account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\")\nlogin_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "fs_access_token = login_result[\"access_token\"]\nvacations_path = \"~/photographs/vacations/\"\nfiles_in_vacations = apis.file_system.show_directory(access_token=fs_access_token, directory_path=vacations_path, entry_type='files', recursive=False)\nprint(files_in_vacations)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "petra_dir = \"~/photographs/vacations/Petra/\"\nbudapest_dir = \"~/photographs/vacations/Budapest/\"\namsterdam_dir = \"~/photographs/vacations/Amsterdam/\"\n\n# Create the directories if they don't exist\napis.file_system.create_directory(access_token=fs_access_token, directory_path=petra_dir, allow_if_exists=True)\napis.file_system.create_directory(access_token=fs_access_token, directory_path=budapest_dir, allow_if_exists=True)\napis.file_system.create_directory(access_token=fs_access_token, directory_path=amsterdam_dir, allow_if_exists=True)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "from datetime import datetime\n\nfor file_path in files_in_vacations:\n    file_details = apis.file_system.show_file(access_token=fs_access_token, file_path=file_path)\n    created_at_str = file_details['created_at']\n    created_at = datetime.fromisoformat(created_at_str)\n\n    destination_dir = \"\"\n    if created_at.year == current_year and created_at.month == 2: # February\n        destination_dir = petra_dir\n    elif created_at.year == current_year and created_at.month == 3: # March\n        destination_dir = budapest_dir\n    else:\n        destination_dir = amsterdam_dir\n\n    file_name = file_path.split('/')[-1]\n    destination_path = destination_dir + file_name\n    apis.file_system.move_file(access_token=fs_access_token, source_file_path=file_path, destination_file_path=destination_path)\n\nprint(\"Files organized successfully.\")"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "652b536eb62397ac34d548144215fb448e46559874adcb18b5b1c893b9dab262"
+    },
+    {
+      "run_id": "38d3f97c3d1d485dbd150ac0b5135fa4",
+      "task_id": "34d9492_1",
+      "architecture": "ace",
+      "phase": "smoke",
+      "status": "conclusive",
+      "official_success": false,
+      "appworld_api_calls": 93,
+      "memory_version": "cf8ff1606933a478643eecd07d6760555261d47bb1cb5e9e0c5c022441bb24f1",
+      "sdk_requests": 18,
+      "generation_requests": 12,
+      "known_estimated_usd": 0.009218829999999999,
+      "unknown_cost_requests": 0,
+      "task_seconds": 21.772031000000425,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "from datetime import datetime\ncurrent_year = datetime.now().year\nprint(current_year)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next(account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\")\nlogin_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "file_system_access_token = login_result[\"access_token\"]\nvacations_path = '~/photographs/vacations/'\nfiles_in_vacations = apis.file_system.show_directory(access_token=file_system_access_token, directory_path=vacations_path, entry_type='files')\nprint(files_in_vacations)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "from datetime import datetime\n\nfile_system_access_token = login_result[\"access_token\"]\ncurrent_year = datetime.now().year\n\npetra_dir = f'~/photographs/vacations/Petra_{current_year}'\nbudapest_dir = f'~/photographs/vacations/Budapest_{current_year}'\namsterdam_dir = f'~/photographs/vacations/Amsterdam_{current_year}'\n\n# Create destination directories\napis.file_system.create_directory(access_token=file_system_access_token, directory_path=petra_dir, allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path=budapest_dir, allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path=amsterdam_dir, allow_if_exists=True)\n\nfor file_path in files_in_vacations:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at_str = file_details['created_at']\n    created_at = datetime.fromisoformat(created_at_str)\n\n    destination_dir = amsterdam_dir # Default to Amsterdam\n\n    if created_at.year == current_year:\n        if created_at.month == 2: # February\n            destination_dir = petra_dir\n        elif created_at.month == 3: # March\n            destination_dir = budapest_dir\n\n    # Move the file\n    file_name = file_path.split('/')[-1]\n    destination_file_path = f\"{destination_dir}/{file_name}\"\n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_file_path)\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "33bcfd3a2dbd8ebbdbf686515410b1bf126bd3416cb603e16f9f2ffd260dde8f"
+    },
+    {
+      "run_id": "397da6627b474d6687edc108fe84ffad",
+      "task_id": "e85d92a_3",
+      "architecture": "ace",
+      "phase": "post_update",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 10,
+      "memory_version": "41b92fc8407b6de7a519f4eaa73f02f42851c7948d2d6b7e1844302a3607d3c2",
+      "sdk_requests": 33,
+      "generation_requests": 18,
+      "known_estimated_usd": 0.023365809999999997,
+      "unknown_cost_requests": 0,
+      "task_seconds": 36.235216000000946,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='supervisor'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='supervisor', api_name='show_account_passwords'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nspotify_password = next(item for item in passwords if item[\"account_name\"] == \"spotify\")[\"password\"]\nprint(apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "spotify_access_token = \"[AUTH REDACTED]\"\nprint(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_artists'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "artists = apis.spotify.search_artists(query='Jasper Skye')\nprint(artists)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "jasper_skye_id = 3\nprint(apis.api_docs.show_api_doc(app_name='spotify', api_name='show_artist_top_songs'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_songs'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "songs = apis.spotify.search_songs(artist_id=jasper_skye_id, sort_by='-play_count')\nprint(songs)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=\"Chasing Echoes in the Rain\")"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "d3a6d3eec1481e943de3f484f007f23fe1bb126ee649ef1185b5a0bed7e857ef"
+    },
+    {
+      "run_id": "3e4d2457650f4beda38d64160a55df85",
+      "task_id": "34d9492_1",
+      "architecture": "mem0",
+      "phase": "smoke",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 96,
+      "memory_version": "9e8270d27bcdcdc56050785efaf2a3c0b6eb0976d98a53b162ae5226aeea6661",
+      "sdk_requests": 40,
+      "generation_requests": 20,
+      "known_estimated_usd": 0.01825278,
+      "unknown_cost_requests": 0,
+      "task_seconds": 45.939766000024974,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "from datetime import datetime\ncurrent_year = datetime.now().year\nprint(current_year)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "file_system_password = [account_password[\"password\"] for account_password in apis.supervisor.show_account_passwords() if account_password[\"account_name\"] == \"file_system\"][0]\nfile_system_access_token = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)[\"access_token\"]\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_directory'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file_details'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "vacation_files = apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/', entry_type='files')\nprint(vacation_files)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='create_directory'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "apis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Petra', allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Budapest', allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Amsterdam', allow_if_exists=True)\nprint(\"Directories created.\")"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='move_file'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "from datetime import datetime\n\nfor file_path in vacation_files:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at_str = file_details['created_at']\n    created_at = datetime.fromisoformat(created_at_str)\n\n    destination_directory = \"\"\n    if created_at.year == current_year:\n        if created_at.month == 2:  # February\n            destination_directory = \"~/photographs/vacations/Petra\"\n        elif created_at.month == 3:  # March\n            destination_directory = \"~/photographs/vacations/Budapest\"\n        else:\n            destination_directory = \"~/photographs/vacations/Amsterdam\"\n    else:\n        destination_directory = \"~/photographs/vacations/Amsterdam\" # Assuming older files are Amsterdam\n\n    file_name = file_path.split('/')[-1]\n    destination_file_path = f\"{destination_directory}/{file_name}\"\n\n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_file_path)\n    print(f\"Moved {file_name} to {destination_directory}\")\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "c3b430833234d207fd4c079b331edcbb9d2c8964df836076314c7673d5609e7d"
+    },
+    {
+      "run_id": "40c1ca82b53c4ea386a105d2f2c905f8",
+      "task_id": "6ea6792_2",
+      "architecture": "gepa",
+      "phase": "retention_v3_control",
+      "status": "conclusive",
+      "official_success": false,
+      "appworld_api_calls": 26,
+      "memory_version": "49726a1d5fd6c6925dee5945580e008b0f39e1a6e739efb2a27edceb62c861e7",
+      "sdk_requests": 30,
+      "generation_requests": 20,
+      "known_estimated_usd": 0.035179,
+      "unknown_cost_requests": 0,
+      "task_seconds": 31.29025299998466,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nvenmo_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"venmo\"), None)\nprint(venmo_password)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "venmo_access_token = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_received_payment_requests'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "page_index = 0\npending_payment_requests = []\nwhile True:\n    response = apis.venmo.show_received_payment_requests(access_token=venmo_access_token, status='pending', page_index=page_index)\n    if not response:\n        break\n    pending_payment_requests.extend(response)\n    page_index += 1\nprint(pending_payment_requests)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='search_friends'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "page_index = 0\nfriends = []\nwhile True:\n    response = apis.venmo.search_friends(access_token=venmo_access_token, user_email='[EMAIL REDACTED]', page_index=page_index)\n    if not response:\n        break\n    friends.extend(response)\n    page_index += 1\nprint(friends)"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "friend_emails = {friend['email'] for friend in friends}\npayment_requests_from_friends = [\n    request for request in pending_payment_requests\n    if request['sender']['email'] in friend_emails\n]\n\nfor request in payment_requests_from_friends:\n    print(f\"Denying payment request ID: {request['payment_request_id']} from {request['sender']['name']}\")\n    apis.venmo.deny_payment_request(access_token=venmo_access_token, payment_request_id=request['payment_request_id'])\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "bf61c86d042e9601b387781933a15ad0ed06ec1d5e496ee8417f4dfaeee21562"
+    },
+    {
+      "run_id": "54a81cae69a6449b8e5e734d7a807383",
+      "task_id": "68ee2c9_1",
+      "architecture": "gepa",
+      "phase": "selection",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 238,
+      "memory_version": "710879e58e2603491357d1c08e8f51e55384c64909b8bda4f6eb323b80eba261",
+      "sdk_requests": 42,
+      "generation_requests": 22,
+      "known_estimated_usd": 0.0331555,
+      "unknown_cost_requests": 0,
+      "task_seconds": 36.57342799997423,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\"), None)\nprint(file_system_password)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='list_files'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_directory'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "file_system_access_token = login_result['access_token']\ndownloads_files = apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/downloads/', entry_type='files', recursive=False)\nprint(downloads_files)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='rename_file'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='move_file'))"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "from datetime import datetime\nimport os\n\nfile_system_access_token = login_result['access_token']\ncurrent_year = datetime.now().year\n\nfor file_path in downloads_files:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    \n    if file_details and 'created_at' in file_details:\n        created_at_str = file_details['created_at']\n        created_at_dt = datetime.fromisoformat(created_at_str)\n        \n        # Prefix with YYYY-MM-DD_\n        file_name = os.path.basename(file_path)\n        directory_name = os.path.dirname(file_path)\n        new_file_name = f\"{created_at_dt.strftime('%Y-%m-%d')}_{file_name}\"\n        new_file_path = os.path.join(directory_name, new_file_name)\n        \n        # Rename the file\n        rename_result = apis.file_system.move_file(\n            access_token=file_system_access_token,\n            source_file_path=file_path,\n            destination_file_path=new_file_path\n        )\n        print(f\"Renamed '{file_path}' to '{new_file_path}': {rename_result}\")\n        \n        # Move to trash if not from this year\n        if created_at_dt.year != current_year:\n            trash_path = os.path.join('~/trash/', new_file_name)\n            move_to_trash_result = apis.file_system.move_file(\n                access_token=file_system_access_token,\n                source_file_path=new_file_path,\n                destination_file_path=trash_path\n            )\n            print(f\"Moved '{new_file_path}' to '{trash_path}': {move_to_trash_result}\")\n    else:\n        print(f\"Could not get details for file: {file_path}\")\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "daf249f5f130db9cd0ab99fec7524e3ab03576e817050231ef2f7e0235281fdb"
+    },
+    {
+      "run_id": "5bc43a19c8ef41db8fb8509baeb90514",
+      "task_id": "68ee2c9_1",
+      "architecture": "gepa",
+      "phase": "selection",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 236,
+      "memory_version": "710879e58e2603491357d1c08e8f51e55384c64909b8bda4f6eb323b80eba261",
+      "sdk_requests": 34,
+      "generation_requests": 18,
+      "known_estimated_usd": 0.0246024,
+      "unknown_cost_requests": 0,
+      "task_seconds": 28.91215699998429,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next(item for item in passwords if item[\"account_name\"] == \"file_system\")[\"password\"]\nfile_system_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nfile_system_access_token = file_system_login_result['access_token']\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_directory'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "downloads_files = apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/downloads/', entry_type='files')\nprint(downloads_files)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='move_file'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "from datetime import datetime\ncurrent_year = datetime.now().year\n\nfor file_path in downloads_files:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at_str = file_details['created_at']\n    created_at_datetime = datetime.fromisoformat(created_at_str)\n    \n    # Format the date for the prefix\n    date_prefix = created_at_datetime.strftime('%Y-%m-%d')\n    \n    # Extract directory and filename\n    directory = '/'.join(file_path.split('/')[:-1])\n    filename = file_path.split('/')[-1]\n    \n    # New filename with prefix\n    new_filename = f\"{date_prefix}_{filename}\"\n    new_file_path = f\"{directory}/{new_filename}\"\n    \n    # Rename the file\n    apis.file_system.move_file(\n        access_token=file_system_access_token,\n        source_file_path=file_path,\n        destination_file_path=new_file_path\n    )\n    \n    # Move to trash if not from this year\n    if created_at_datetime.year != current_year:\n        trash_path = f\"~/trash/{new_filename}\"\n        apis.file_system.move_file(\n            access_token=file_system_access_token,\n            source_file_path=new_file_path,\n            destination_file_path=trash_path\n        )\n\nprint(\"Files processed successfully.\")"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "a21653e4e926ffe718af4702b2440d8f1cb23d304d1fca6ae84cb2260e28d8f3"
+    },
+    {
+      "run_id": "5d24baab853c4aea821169d2b856a94a",
+      "task_id": "2a163ab_1",
+      "architecture": "recmem",
+      "phase": "smoke",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 236,
+      "memory_version": "952543578110d1e4c7874c012243f1415c88ec1a0e48b98898c03cfb39969a82",
+      "sdk_requests": 80,
+      "generation_requests": 32,
+      "known_estimated_usd": 0.06631315,
+      "unknown_cost_requests": 0,
+      "task_seconds": 54.23369000002276,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "venmo_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"venmo\"][0][\"password\"]\nvenmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = venmo_login_result['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nvenmo_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"venmo\"][0][\"password\"]\nvenmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = venmo_login_result['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "from datetime import datetime, timedelta\n\ntoday = datetime.now().strftime('%Y-%m-%d')\nprint(today)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_social_feed'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='supervisor'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='phone'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='search_contacts'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "phone_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"phone\"][0][\"password\"]\nphone_login_result = apis.phone.login(username='3383946795', password=phone_password)\nphone_access_token = phone_login_result['access_token']\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "roommates = []\npage_index = 0\nwhile True:\n    roommate_page = apis.phone.search_contacts(access_token=phone_access_token, relationship='roommate', page_index=page_index)\n    if roommate_page:\n        roommates.extend(roommate_page)\n        page_index += 1\n    else:\n        break\nprint(roommates)"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "roommate_emails = [roommate['email'] for roommate in roommates]\nprint(roommate_emails)"
+          ]
+        },
+        {
+          "decision": 14,
+          "python_inputs": [
+            "social_feed_transactions = []\npage_index = 0\nwhile True:\n    feed_page = apis.venmo.show_social_feed(access_token=venmo_access_token, page_index=page_index)\n    if feed_page:\n        social_feed_transactions.extend(feed_page)\n        page_index += 1\n    else:\n        break\n\ntransactions_to_like = []\nfor transaction in social_feed_transactions:\n    transaction_date = transaction['created_at'].split('T')[0]\n    if transaction_date == today:\n        sender_email = transaction['sender']['email']\n        receiver_email = transaction['receiver']['email']\n        if sender_email in roommate_emails or receiver_email in roommate_emails:\n            transactions_to_like.append(transaction)\n\nprint(transactions_to_like)"
+          ]
+        },
+        {
+          "decision": 15,
+          "python_inputs": [
+            "for transaction in transactions_to_like:\n    apis.venmo.like_transaction(access_token=venmo_access_token, transaction_id=transaction['transaction_id'])\nprint(\"All relevant transactions have been liked.\")"
+          ]
+        },
+        {
+          "decision": 16,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "90ac6dbfc10d8a8cd7a9ee607e5446aa4282ad01b8121d6a434a15226cfbef89"
+    },
+    {
+      "run_id": "646cde1b87834a478070da8b8f3ac405",
+      "task_id": "68ee2c9_2",
+      "architecture": "gepa",
+      "phase": "retention_exposure",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 156,
+      "memory_version": "55ce8a7f698def271ab666bb2e5350f76e8061d0505d7a6d39a5c5fb36b48640",
+      "sdk_requests": 52,
+      "generation_requests": 26,
+      "known_estimated_usd": 0.05834804,
+      "unknown_cost_requests": 0,
+      "task_seconds": 41.32465999998385,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "fs_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"file_system\"][0][\"password\"]\nfs_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=fs_password)\nfs_access_token = fs_login_result['access_token']\nprint(fs_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfs_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"file_system\"][0][\"password\"]\nfs_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=fs_password)\nfs_access_token = fs_login_result['access_token']\nprint(fs_access_token)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_directory'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "downloaded_files_path = '~/downloaded_files/'\nfiles_in_download_dir = apis.file_system.show_directory(access_token=fs_access_token, directory_path=downloaded_files_path, entry_type='files', recursive=False)\nprint(files_in_download_dir)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "from datetime import datetime\nimport os\n\ncurrent_year = datetime.now().year\nfiles_to_process = []\n\nfor file_path in files_in_download_dir:\n    file_details = apis.file_system.show_file(access_token=fs_access_token, file_path=file_path)\n    if file_details and 'created_at' in file_details:\n        created_at_str = file_details['created_at']\n        created_datetime = datetime.fromisoformat(created_at_str)\n        creation_year = created_datetime.year\n        \n        # Format the date as YYYY_MM_DD\n        date_prefix = created_datetime.strftime('%Y_%m_%d')\n        \n        # Extract directory and filename\n        directory, filename = os.path.split(file_path)\n        \n        # Construct the new filename with the prefix\n        new_filename = f\"{date_prefix}-{filename}\"\n        new_file_path = os.path.join(directory, new_filename)\n        \n        files_to_process.append({\n            'original_path': file_path,\n            'new_path': new_file_path,\n            'creation_year': creation_year\n        })\n\nprint(files_to_process)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='move_file'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "renamed_files_info = []\nfor file_info in files_to_process:\n    rename_result = apis.file_system.move_file(\n        access_token=fs_access_token,\n        source_file_path=file_info['original_path'],\n        destination_file_path=file_info['new_path']\n    )\n    if rename_result and 'destination_file_path' in rename_result:\n        renamed_files_info.append({\n            'original_path': file_info['original_path'],\n            'new_path': rename_result['destination_file_path'],\n            'creation_year': file_info['creation_year']\n        })\n    else:\n        print(f\"Failed to rename {file_info['original_path']}: {rename_result}\")\n\nprint(renamed_files_info)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='directory_exists'))\nprint(apis.api_docs.show_api_doc(app_name='file_system', api_name='create_directory'))"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "recycle_bin_path = '~/recycle_bin/'\nrecycle_bin_exists = apis.file_system.directory_exists(access_token=fs_access_token, directory_path=recycle_bin_path)\n\nif not recycle_bin_exists['exists']:\n    create_recycle_bin_result = apis.file_system.create_directory(access_token=fs_access_token, directory_path=recycle_bin_path, allow_if_exists=True)\n    print(f\"Created recycle bin: {create_recycle_bin_result}\")\nelse:\n    print(\"Recycle bin already exists.\")"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "current_year = datetime.now().year\nfor file_info in renamed_files_info:\n    if file_info['creation_year'] != current_year:\n        # Extract just the filename from the new_path\n        filename = os.path.basename(file_info['new_path'])\n        destination_path = os.path.join(recycle_bin_path, filename)\n        \n        move_result = apis.file_system.move_file(\n            access_token=fs_access_token,\n            source_file_path=file_info['new_path'],\n            destination_file_path=destination_path\n        )\n        if move_result and 'destination_file_path' in move_result:\n            print(f\"Moved {file_info['new_path']} to {move_result['destination_file_path']}\")\n        else:\n            print(f\"Failed to move {file_info['new_path']}: {move_result}\")\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "1e2a5eff382e6adbe3123965725b3ba41adf24cf9de5fbe03838e5fde0f6d381"
+    },
+    {
+      "run_id": "66824006f18444cab591ef966e7e1992",
+      "task_id": "34d9492_1",
+      "architecture": "ace",
+      "phase": "smoke_exposure",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 95,
+      "memory_version": "bcbc0bc2388662296c2c5de06a5406ae87a5b4a9916113f5b06d62ccffd7535d",
+      "sdk_requests": 36,
+      "generation_requests": 18,
+      "known_estimated_usd": 0.02494147,
+      "unknown_cost_requests": 0,
+      "task_seconds": 28.62513600004604,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "from datetime import datetime\ncurrent_year = datetime.now().year\nprint(current_year)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "fs_password = [account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\"][0]\nfs_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=fs_password)\nfs_access_token = fs_login_result['access_token']\nprint(fs_access_token)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfs_password = [account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\"][0]\nfs_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=fs_password)\nfs_access_token = fs_login_result['access_token']\nprint(fs_access_token)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_directory'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "vacations_path = '~/photographs/vacations/'\nfiles_in_vacations = apis.file_system.show_directory(access_token=fs_access_token, directory_path=vacations_path, entry_type='files')\nprint(files_in_vacations)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "destination_paths = {\n    'Petra': '~/photographs/vacations/Petra/',\n    'Budapest': '~/photographs/vacations/Budapest/',\n    'Amsterdam': '~/photographs/vacations/Amsterdam/'\n}\n\n# Create destination directories if they don't exist\nfor vacation_spot, path in destination_paths.items():\n    apis.file_system.create_directory(access_token=fs_access_token, directory_path=path, allow_if_exists=True)\n\nfor file_path in files_in_vacations:\n    file_details = apis.file_system.show_file(access_token=fs_access_token, file_path=file_path)\n    created_at_str = file_details['created_at']\n    created_at = datetime.fromisoformat(created_at_str)\n\n    destination_vacation = 'Amsterdam' # Default to Amsterdam\n\n    if created_at.year == current_year:\n        if created_at.month == 2: # February\n            destination_vacation = 'Petra'\n        elif created_at.month == 3: # March\n            destination_vacation = 'Budapest'\n    \n    destination_directory = destination_paths[destination_vacation]\n    file_name = file_path.split('/')[-1]\n    destination_file_path = destination_directory + file_name\n    \n    apis.file_system.move_file(access_token=fs_access_token, source_file_path=file_path, destination_file_path=destination_file_path)\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "b551ba9c80f6137135af504d4c42765e2d8dfdfb317f0e271f1bddaa585f6eaf"
+    },
+    {
+      "run_id": "74192ba79bfc486f94576685fba17bfa",
+      "task_id": "6ea6792_2",
+      "architecture": "gepa",
+      "phase": "retention_exposure",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 36,
+      "memory_version": "55ce8a7f698def271ab666bb2e5350f76e8061d0505d7a6d39a5c5fb36b48640",
+      "sdk_requests": 59,
+      "generation_requests": 30,
+      "known_estimated_usd": 0.03107048,
+      "unknown_cost_requests": 0,
+      "task_seconds": 40.01125499996124,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nvenmo_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"venmo\"), None)\nprint(venmo_password)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "venmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = venmo_login_result['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_received_payment_requests'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "page_index = 0\npending_requests = []\nwhile True:\n    response = apis.venmo.show_received_payment_requests(access_token=venmo_access_token, status='pending', page_index=page_index)\n    if response:\n        pending_requests.extend(response)\n        page_index += 1\n    else:\n        break\nprint(pending_requests)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='phone'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='search_contacts'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "phone_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"phone\"), None)\nprint(phone_password)"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "phone_login_result = apis.phone.login(username='[EMAIL REDACTED]', password=phone_password)\nphone_access_token = phone_login_result['access_token']\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nphone_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"phone\"), None)\nprint(phone_password)"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "phone_login_result = apis.phone.login(username='5734599766', password=phone_password)\nphone_access_token = phone_login_result['access_token']\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "page_index = 0\nfriends = []\nwhile True:\n    response = apis.phone.search_contacts(access_token=phone_access_token, relationship='friend', page_index=page_index)\n    if response:\n        friends.extend(response)\n        page_index += 1\n    else:\n        break\n\npage_index = 0\nroommates = []\nwhile True:\n    response = apis.phone.search_contacts(access_token=phone_access_token, relationship='roommate', page_index=page_index)\n    if response:\n        roommates.extend(response)\n        page_index += 1\n    else:\n        break\n\nall_contacts = friends + roommates\nprint(all_contacts)"
+          ]
+        },
+        {
+          "decision": 14,
+          "python_inputs": [
+            "friend_roommate_emails = {contact['email'] for contact in all_contacts}\nrequests_to_deny = []\nfor request in pending_requests:\n    if request['sender']['email'] in friend_roommate_emails:\n        requests_to_deny.append(request)\n\nprint(requests_to_deny)"
+          ]
+        },
+        {
+          "decision": 15,
+          "python_inputs": [
+            "for request in requests_to_deny:\n    deny_result = apis.venmo.deny_payment_request(access_token=venmo_access_token, payment_request_id=request['payment_request_id'])\n    print(f\"Denied request {request['payment_request_id']}: {deny_result}\")\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "6c5b3f578a8db5e1873c84c126c744de2d100a1596af760c47de8502b3b03e52"
+    },
+    {
+      "run_id": "7f4b396b06da47309a590bd322834b86",
+      "task_id": "34d9492_1",
+      "architecture": "recmem",
+      "phase": "smoke",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 92,
+      "memory_version": "05c22ed73c2bf2d43e1e6b65bbd0da010884e7050880dc295cf5f9233d0b44b0",
+      "sdk_requests": 28,
+      "generation_requests": 14,
+      "known_estimated_usd": 0.0142153,
+      "unknown_cost_requests": 0,
+      "task_seconds": 26.917385999986436,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "from datetime import datetime\ncurrent_year = datetime.now().year\nprint(current_year)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "file_system_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"file_system\"][0][\"password\"]\nfs_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nprint(fs_login_result)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"file_system\"][0][\"password\"]\nfs_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nprint(fs_login_result)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "fs_access_token = fs_login_result[\"access_token\"]\nvacation_files = apis.file_system.show_directory(access_token=fs_access_token, directory_path='~/photographs/vacations/', entry_type='files')\nprint(vacation_files)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "file_details = []\nfor file_path in vacation_files:\n    details = apis.file_system.show_file(access_token=fs_access_token, file_path=file_path)\n    file_details.append(details)\nprint(file_details)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "petra_dir = '~/photographs/vacations/Petra'\nbudapest_dir = '~/photographs/vacations/Budapest'\namsterdam_dir = '~/photographs/vacations/Amsterdam'\n\napis.file_system.create_directory(access_token=fs_access_token, directory_path=petra_dir, recursive=True, allow_if_exists=True)\napis.file_system.create_directory(access_token=fs_access_token, directory_path=budapest_dir, recursive=True, allow_if_exists=True)\napis.file_system.create_directory(access_token=fs_access_token, directory_path=amsterdam_dir, recursive=True, allow_if_exists=True)\n\nfor file_info in file_details:\n    created_at_str = file_info['created_at']\n    created_at_date = datetime.fromisoformat(created_at_str)\n    \n    destination_dir = \"\"\n    if created_at_date.year == current_year and created_at_date.month == 2:\n        destination_dir = petra_dir\n    elif created_at_date.year == current_year and created_at_date.month == 3:\n        destination_dir = budapest_dir\n    else:\n        destination_dir = amsterdam_dir\n    \n    file_name = file_info['path'].split('/')[-1]\n    destination_path = f\"{destination_dir}/{file_name}\"\n    \n    apis.file_system.move_file(access_token=fs_access_token, source_file_path=file_info['path'], destination_file_path=destination_path)\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "c3411a192b88d0f68fd3a630f7ad6b5d478ca6e56e9f3f425bf8d4c74f6e9dc9"
+    },
+    {
+      "run_id": "8b788a01cb984fb0a0570cf877beca14",
+      "task_id": "6ea6792_2",
+      "architecture": "ace",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 37,
+      "memory_version": "8988e3e57f1c1881479be776bc0c1624f24ef14e2c50da6fe96dcc38eeeb15b4",
+      "sdk_requests": 47,
+      "generation_requests": 24,
+      "known_estimated_usd": 0.048269269999999996,
+      "unknown_cost_requests": 0,
+      "task_seconds": 75.27074299997184,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "venmo_password = [account_password for account_password in apis.supervisor.show_account_passwords() if account_password[\"account_name\"] == \"venmo\"][0][\"password\"]\nvenmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = venmo_login_result['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_received_payment_requests'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "page_index = 0\npending_requests = []\nwhile True:\n    response = apis.venmo.show_received_payment_requests(access_token=venmo_access_token, status='pending', page_index=page_index)\n    if response:\n        pending_requests.extend(response)\n        page_index += 1\n    else:\n        break\nprint(pending_requests)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='phone'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='search_contacts'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "phone_password = [account_password for account_password in apis.supervisor.show_account_passwords() if account_password[\"account_name\"] == \"phone\"][0][\"password\"]\nphone_login_result = apis.phone.login(username='5734599766', password=phone_password)\nphone_access_token = phone_login_result['access_token']\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "page_index = 0\nfriends_and_roommates = []\nwhile True:\n    friends = apis.phone.search_contacts(access_token=phone_access_token, relationship='friend', page_index=page_index)\n    roommates = apis.phone.search_contacts(access_token=phone_access_token, relationship='roommate', page_index=page_index)\n    if friends or roommates:\n        friends_and_roommates.extend(friends)\n        friends_and_roommates.extend(roommates)\n        page_index += 1\n    else:\n        break\nprint(friends_and_roommates)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "friend_and_roommate_emails = [contact['email'] for contact in friends_and_roommates]\nrequests_to_deny = [req for req in pending_requests if req['sender']['email'] in friend_and_roommate_emails]\n\nfor request in requests_to_deny:\n    print(apis.venmo.deny_payment_request(access_token=venmo_access_token, payment_request_id=request['payment_request_id']))"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "26e052a743418c28be78aa7a75992a5b3d1751abfa078776dd848671cc593bd6"
+    },
+    {
+      "run_id": "8cf966da93b34b1bafe7898ea19c9d27",
+      "task_id": "d0b1f43_1",
+      "architecture": "mem0",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 20,
+      "memory_version": "43eec588110e8f4db92ff8e2ab7ed3ddfecca80aaff9ef1b30103a0516597a76",
+      "sdk_requests": 54,
+      "generation_requests": 22,
+      "known_estimated_usd": 0.0393419,
+      "unknown_cost_requests": 0,
+      "task_seconds": 38.48383899999317,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "from datetime import datetime\n\ncurrent_year = datetime.now().year\nmin_created_at_date = f\"{current_year}-01-01\"\nprint(min_created_at_date)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='phone'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='search_contacts'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "phone_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"phone\"][0][\"password\"]\nphone_login_result = apis.phone.login(username='[EMAIL REDACTED]', password=phone_password)\nphone_access_token = phone_login_result[\"access_token\"]\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nphone_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"phone\"][0][\"password\"]\nphone_login_result = apis.phone.login(username='[EMAIL REDACTED]', password=phone_password)\nphone_access_token = phone_login_result[\"access_token\"]\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nphone_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"phone\"][0][\"password\"]\nphone_login_result = apis.phone.login(username='8506051563', password=phone_password)\nphone_access_token = phone_login_result[\"access_token\"]\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "roommates = []\npage_index = 0\nwhile True:\n    roommate_page = apis.phone.search_contacts(access_token=phone_access_token, relationship='roommate', page_index=page_index)\n    if roommate_page:\n        roommates.extend(roommate_page)\n        page_index += 1\n    else:\n        break\nprint(roommates)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "venmo_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"venmo\"][0][\"password\"]\nvenmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = venmo_login_result[\"access_token\"]\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "total_sent_to_roommates = 0.0\nfor roommate in roommates:\n    roommate_email = roommate[\"email\"]\n    page_index = 0\n    while True:\n        transactions_page = apis.venmo.show_transactions(\n            access_token=venmo_access_token,\n            user_email=roommate_email,\n            direction='sent',\n            min_created_at=min_created_at_date,\n            page_index=page_index\n        )\n        if transactions_page:\n            for transaction in transactions_page:\n                total_sent_to_roommates += transaction[\"amount\"]\n            page_index += 1\n        else:\n            break\nprint(total_sent_to_roommates)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=total_sent_to_roommates)"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "c306af174695b76063d4997f5aea0e38ccb1532f04ebbe86999b17ef5d0c99fe"
+    },
+    {
+      "run_id": "96db1dfd485f4817adac2c4d5d6c9968",
+      "task_id": "6ea6792_2",
+      "architecture": "recmem",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 35,
+      "memory_version": "77aa846e81f7feb5e0352a7e5598a3c27fc00806a4c794989c48d5b24f6c7f66",
+      "sdk_requests": 70,
+      "generation_requests": 28,
+      "known_estimated_usd": 0.0783354,
+      "unknown_cost_requests": 0,
+      "task_seconds": 45.20790199999465,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nprint(passwords)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "venmo_password = next(item for item in passwords if item[\"account_name\"] == \"venmo\")[\"password\"]\nlogin_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = login_result['access_token']\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_received_payment_requests'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "page_index = 0\npending_requests = []\nwhile True:\n    response = apis.venmo.show_received_payment_requests(access_token=venmo_access_token, status='pending', page_index=page_index)\n    if not response:\n        break\n    pending_requests.extend(response)\n    page_index += 1\nprint(pending_requests)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='phone'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='search_contacts'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "phone_password = next(item for item in passwords if item[\"account_name\"] == \"phone\")[\"password\"]\nlogin_result = apis.phone.login(username='5734599766', password=phone_password)\nphone_access_token = login_result['access_token']\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "friends = []\npage_index = 0\nwhile True:\n    response = apis.phone.search_contacts(access_token=phone_access_token, relationship='friend', page_index=page_index)\n    if not response:\n        break\n    friends.extend(response)\n    page_index += 1\n\nroommates = []\npage_index = 0\nwhile True:\n    response = apis.phone.search_contacts(access_token=phone_access_token, relationship='roommate', page_index=page_index)\n    if not response:\n        break\n    roommates.extend(response)\n    page_index += 1\n\nall_relevant_contacts = friends + roommates\nprint(all_relevant_contacts)"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "relevant_emails = {contact['email'] for contact in all_relevant_contacts}\nprint(relevant_emails)"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "for request in pending_requests:\n    if request['sender']['email'] in relevant_emails:\n        print(f\"Denying payment request ID: {request['payment_request_id']} from {request['sender']['name']}\")\n        apis.venmo.deny_payment_request(access_token=venmo_access_token, payment_request_id=request['payment_request_id'])"
+          ]
+        },
+        {
+          "decision": 14,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "7f34d8af4242174c8d95f795f248d5ae37e7520e722bf393339645b36061ad1e"
+    },
+    {
+      "run_id": "9a312b8db786463a8806cc9db7bc1d86",
+      "task_id": "6bdbc26_3",
+      "architecture": "gepa",
+      "phase": "selection",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 9,
+      "memory_version": "710879e58e2603491357d1c08e8f51e55384c64909b8bda4f6eb323b80eba261",
+      "sdk_requests": 32,
+      "generation_requests": 16,
+      "known_estimated_usd": 0.0275124,
+      "unknown_cost_requests": 0,
+      "task_seconds": 22.924773999955505,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='spotify'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='show_current_song'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "current_song = apis.spotify.show_current_song(access_token=spotify_access_token)\nartist_id = current_song[\"artists\"][0][\"id\"]\nprint(artist_id)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nspotify_password = next(account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"spotify\")\nlogin_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nspotify_access_token = login_result[\"access_token\"]\ncurrent_song = apis.spotify.show_current_song(access_token=spotify_access_token)\nartist_id = current_song[\"artists\"][0][\"id\"]\nprint(artist_id)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='spotify'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='show_artist'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "artist_details = apis.spotify.show_artist(artist_id=artist_id)\nfollower_count = artist_details[\"follower_count\"]\nprint(follower_count)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=follower_count)"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "efdfc99e06aaeff4247630fb1377bb6c2119d5484f67bf1b66cd56893caebb64"
+    },
+    {
+      "run_id": "9c8e09359a124b138f1ab9420ffb9439",
+      "task_id": "2a163ab_1",
+      "architecture": "trace2skill",
+      "phase": "smoke",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 238,
+      "memory_version": "5ab484aa2f127967488f49838ec5a32fd1b12734a69dc3499c5ea9ce073cd117",
+      "sdk_requests": 44,
+      "generation_requests": 30,
+      "known_estimated_usd": 0.02380521,
+      "unknown_cost_requests": 0,
+      "task_seconds": 53.696991999982856,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nprint(passwords)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "venmo_password = next(item for item in passwords if item[\"account_name\"] == \"venmo\")[\"password\"]\nvenmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = venmo_login_result['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='get_current_date_and_time'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "current_date_time = apis.phone.get_current_date_and_time()\ntoday_date = current_date_time['date']\nprint(today_date)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "from datetime import datetime\n\ndate_object = datetime.strptime(today_date, '%A, %B %d, %Y')\nformatted_date = date_object.strftime('%Y-%m-%d')\nprint(formatted_date)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='supervisor'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='phone'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='search_contacts'))"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "phone_password = next(item for item in passwords if item[\"account_name\"] == \"phone\")[\"password\"]\nphone_login_result = apis.phone.login(username='3383946795', password=phone_password)\nphone_access_token = phone_login_result['access_token']\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "roommates = []\npage_index = 0\nwhile True:\n    roommate_page = apis.phone.search_contacts(access_token=phone_access_token, relationship='roommate', page_index=page_index)\n    if roommate_page:\n        roommates.extend(roommate_page)\n        page_index += 1\n    else:\n        break\nroommate_emails = [roommate['email'] for roommate in roommates]\nprint(roommate_emails)"
+          ]
+        },
+        {
+          "decision": 14,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_social_feed'))"
+          ]
+        },
+        {
+          "decision": 15,
+          "python_inputs": [
+            "all_transactions = []\npage_index = 0\nwhile True:\n    social_feed_page = apis.venmo.show_social_feed(access_token=venmo_access_token, page_index=page_index)\n    if social_feed_page:\n        all_transactions.extend(social_feed_page)\n        page_index += 1\n    else:\n        break\n\ntransactions_to_like = []\nfor transaction in all_transactions:\n    transaction_date = transaction['created_at'].split('T')[0]\n    if transaction_date == formatted_date:\n        sender_email = transaction['sender']['email']\n        receiver_email = transaction['receiver']['email']\n        if sender_email in roommate_emails or receiver_email in roommate_emails:\n            transactions_to_like.append(transaction['transaction_id'])\n\nfor transaction_id in transactions_to_like:\n    apis.venmo.like_transaction(access_token=venmo_access_token, transaction_id=transaction_id)\n\napis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "3761fa8de75de2002b8e22cccf38f3bf922152395eafb5f4c4d65777adec1464"
+    },
+    {
+      "run_id": "9d702ffd66d24fa880f9700cbe732022",
+      "task_id": "6ea6792_2",
+      "architecture": "mem0",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": false,
+      "appworld_api_calls": 32,
+      "memory_version": "a6b79dbb75a0a93cb46999b41ae5d76d6474cf9ca21c43b9b2d1ce1898eb4c94",
+      "sdk_requests": 35,
+      "generation_requests": 14,
+      "known_estimated_usd": 0.0264543,
+      "unknown_cost_requests": 0,
+      "task_seconds": 25.350787000032142,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nvenmo_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"venmo\"), None)\nprint(venmo_password)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "venmo_access_token = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_received_payment_requests'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "page_index = 0\npending_requests = []\nwhile True:\n    response = apis.venmo.show_received_payment_requests(access_token=venmo_access_token, status='pending', page_index=page_index)\n    if response:\n        pending_requests.extend(response)\n        page_index += 1\n    else:\n        break\nprint(pending_requests)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "for request in pending_requests:\n    print(apis.venmo.deny_payment_request(access_token=venmo_access_token, payment_request_id=request['payment_request_id']))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "557a191c05f27fee8749bcfd6ed9ce7c0c7e9d9ea44c892413ff70c8d21bc90e"
+    },
+    {
+      "run_id": "a041e1dfb5c046958e1ba2388c4cdf87",
+      "task_id": "34d9492_1",
+      "architecture": "trace2skill",
+      "phase": "smoke_exposure",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 93,
+      "memory_version": "b5c50b1d50948e80e76dd333d37cd6f8b84938542477a01944e272e2c7bf4ea9",
+      "sdk_requests": 42,
+      "generation_requests": 22,
+      "known_estimated_usd": 0.03049389,
+      "unknown_cost_requests": 0,
+      "task_seconds": 40.3682470000349,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.file_system.show_directory(path='~/photographs/vacations/'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='supervisor'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\"), None)\nprint(file_system_password)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "file_system_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nfile_system_access_token = file_system_login_result['access_token']\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "from datetime import datetime\n\nfiles = [\n \"/home/paul/photographs/vacations/img_02237d7.jpg\",\n \"/home/paul/photographs/vacations/img_0d36b21.jpeg\",\n \"/home/paul/photographs/vacations/img_0e15e48.jpg\",\n \"/home/paul/photographs/vacations/img_164a3fe.jpeg\",\n \"/home/paul/photographs/vacations/img_16b39ad.png\",\n \"/home/paul/photographs/vacations/img_18b06cc.png\",\n \"/home/paul/photographs/vacations/img_1a2b16d.jpeg\",\n \"/home/paul/photographs/vacations/img_254fbd9.jpg\",\n \"/home/paul/photographs/vacations/img_26cb65d.png\",\n \"/home/paul/photographs/vacations/img_29f19c8.jpg\",\n \"/home/paul/photographs/vacations/img_2dbefae.png\",\n \"/home/paul/photographs/vacations/img_2ecf83d.jpeg\",\n \"/home/paul/photographs/vacations/img_301305f.jpg\",\n \"/home/paul/photographs/vacations/img_32dc30d.jpeg\",\n \"/home/paul/photographs/vacations/img_44361f7.jpeg\",\n \"/home/paul/photographs/vacations/img_4d1aafc.jpeg\",\n \"/home/paul/photographs/vacations/img_4d7f44a.jpeg\",\n \"/home/paul/photographs/vacations/img_537a8a3.png\",\n \"/home/paul/photographs/vacations/img_5c2f56b.jpeg\",\n \"/home/paul/photographs/vacations/img_62679d2.jpeg\",\n \"/home/paul/photographs/vacations/img_6a1d6f6.jpeg\",\n \"/home/paul/photographs/vacations/img_6a74f01.jpeg\",\n \"/home/paul/photographs/vacations/img_6d078f8.jpg\",\n \"/home/paul/photographs/vacations/img_750c944.jpeg\",\n \"/home/paul/photographs/vacations/img_799a654.jpeg\",\n \"/home/paul/photographs/vacations/img_7e6273e.png\",\n \"/home/paul/photographs/vacations/img_846760e.jpg\",\n \"/home/paul/photographs/vacations/img_8df984b.png\",\n \"/home/paul/photographs/vacations/img_8f8933a.jpeg\",\n \"/home/paul/photographs/vacations/img_a1640a1.png\",\n \"/home/paul/photographs/vacations/img_a46cf01.jpg\",\n \"/home/paul/photographs/vacations/img_a5da8e1.png\",\n \"/home/paul/photographs/vacations/img_abab143.png\",\n \"/home/paul/photographs/vacations/img_b70df1d.png\",\n \"/home/paul/photographs/vacations/img_c1d84e4.jpeg\",\n \"/home/paul/photographs/vacations/img_d77a00c.png\",\n \"/home/paul/photographs/vacations/img_da771fe.jpeg\",\n \"/home/paul/photographs/vacations/img_ede9877.jpeg\",\n \"/home/paul/photographs/vacations/img_f1ac2b4.jpg\",\n \"/home/paul/photographs/vacations/img_f24e638.jpeg\",\n \"/home/paul/photographs/vacations/img_f8dd7c3.jpeg\",\n \"/home/paul/photographs/vacations/img_fcc5ff7.jpeg\"\n]\n\nfile_data = {}\nfor file_path in files:\n    file_info = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    file_data[file_path] = file_info['created_at']\n\nprint(file_data)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "petra_files = []\nbudapest_files = []\namsterdam_files = []\n\nfor file_path, created_at_str in file_data.items():\n    created_at = datetime.fromisoformat(created_at_str)\n    if created_at.year == 2023:\n        if created_at.month == 2:\n            petra_files.append(file_path)\n        elif created_at.month == 3:\n            budapest_files.append(file_path)\n        else:\n            amsterdam_files.append(file_path)\n    else:\n        amsterdam_files.append(file_path)\n\nprint(f\"Petra files: {petra_files}\")\nprint(f\"Budapest files: {budapest_files}\")\nprint(f\"Amsterdam files: {amsterdam_files}\")"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "apis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Petra', recursive=True, allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Budapest', recursive=True, allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Amsterdam', recursive=True, allow_if_exists=True)"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "for file_path in petra_files:\n    file_name = file_path.split('/')[-1]\n    destination_path = f'~/photographs/vacations/Petra/{file_name}'\n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_path)\n\nfor file_path in budapest_files:\n    file_name = file_path.split('/')[-1]\n    destination_path = f'~/photographs/vacations/Budapest/{file_name}'\n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_path)\n\nfor file_path in amsterdam_files:\n    file_name = file_path.split('/')[-1]\n    destination_path = f'~/photographs/vacations/Amsterdam/{file_name}'\n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_path)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "acc834e1c77573e0173332ec12601c98c3a7f9b4d7efc4ad109eb320cf8bf350"
+    },
+    {
+      "run_id": "a15ec9a042484f5d94ab4ad24ab1f0db",
+      "task_id": "68ee2c9_2",
+      "architecture": "gepa",
+      "phase": "selection",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 216,
+      "memory_version": "710879e58e2603491357d1c08e8f51e55384c64909b8bda4f6eb323b80eba261",
+      "sdk_requests": 43,
+      "generation_requests": 22,
+      "known_estimated_usd": 0.03358116,
+      "unknown_cost_requests": 0,
+      "task_seconds": 41.935270999965724,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nprint(passwords)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "fs_password = next(item for item in passwords if item[\"account_name\"] == \"file_system\")[\"password\"]\nlogin_result = apis.file_system.login(username='[EMAIL REDACTED]', password=fs_password)\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "fs_access_token = login_result['access_token']\ndownloaded_files = apis.file_system.show_directory(access_token=fs_access_token, directory_path='~/downloaded_files/', entry_type='files', recursive=False)\nprint(downloaded_files)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "current_date_time = apis.phone.get_current_date_and_time()\ncurrent_year = current_date_time['date_time']['year']\nprint(f\"Current Year: {current_year}\")"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "current_date_time = apis.phone.get_current_date_and_time()\nprint(current_date_time)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "from datetime import datetime\n\ncurrent_date_time_str = apis.phone.get_current_date_and_time()['date']\ncurrent_date = datetime.strptime(current_date_time_str, \"%A, %B %d, %Y\")\ncurrent_year = current_date.year\nprint(f\"Current Year: {current_year}\")"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "import os\nfrom datetime import datetime\n\nfs_access_token = login_result['access_token']\ncurrent_date_time_str = apis.phone.get_current_date_and_time()['date']\ncurrent_date = datetime.strptime(current_date_time_str, \"%A, %B %d, %Y\")\ncurrent_year = current_date.year\n\nfor file_path in downloaded_files:\n    file_details = apis.file_system.show_file(access_token=fs_access_token, file_path=file_path)\n    created_at_str = file_details['created_at']\n    created_at_datetime = datetime.fromisoformat(created_at_str)\n    \n    # Format the date as YYYY_MM_DD\n    date_prefix = created_at_datetime.strftime(\"%Y_%m_%d\")\n    \n    # Extract directory and filename\n    directory, filename = os.path.split(file_path)\n    \n    # Construct the new file name\n    new_filename = f\"{date_prefix}-{filename}\"\n    new_file_path = os.path.join(directory, new_filename)\n    \n    # Rename the file\n    rename_result = apis.file_system.rename_file(\n        access_token=fs_access_token,\n        source_file_path=file_path,\n        destination_file_path=new_file_path\n    )\n    print(f\"Renamed {file_path} to {new_file_path}: {rename_result}\")\n    \n    # Check if the file is not from the current year and move it to recycle_bin\n    if created_at_datetime.year != current_year:\n        recycle_bin_path = os.path.join('~/recycle_bin/', new_filename)\n        move_result = apis.file_system.move_file(\n            access_token=fs_access_token,\n            source_file_path=new_file_path,\n            destination_file_path=recycle_bin_path\n        )\n        print(f\"Moved {new_file_path} to {recycle_bin_path}: {move_result}\")"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "import os\nfrom datetime import datetime\n\nfs_access_token = login_result['access_token']\ncurrent_date_time_str = apis.phone.get_current_date_and_time()['date']\ncurrent_date = datetime.strptime(current_date_time_str, \"%A, %B %d, %Y\")\ncurrent_year = current_date.year\n\nfor file_path in downloaded_files:\n    file_details = apis.file_system.show_file(access_token=fs_access_token, file_path=file_path)\n    created_at_str = file_details['created_at']\n    created_at_datetime = datetime.fromisoformat(created_at_str)\n    \n    # Format the date as YYYY_MM_DD\n    date_prefix = created_at_datetime.strftime(\"%Y_%m_%d\")\n    \n    # Extract directory and filename\n    directory, filename = os.path.split(file_path)\n    \n    # Construct the new file name\n    new_filename = f\"{date_prefix}-{filename}\"\n    new_file_path = os.path.join(directory, new_filename)\n    \n    # Copy the file to the new name\n    copy_result = apis.file_system.copy_file(\n        access_token=fs_access_token,\n        source_file_path=file_path,\n        destination_file_path=new_file_path\n    )\n    print(f\"Copied {file_path} to {new_file_path}: {copy_result}\")\n    \n    # Delete the original file\n    delete_result = apis.file_system.delete_file(\n        access_token=fs_access_token,\n        file_path=file_path\n    )\n    print(f\"Deleted original file {file_path}: {delete_result}\")\n    \n    # Check if the file is not from the current year and move it to recycle_bin\n    if created_at_datetime.year != current_year:\n        recycle_bin_path = os.path.join('~/recycle_bin/', new_filename)\n        move_result = apis.file_system.move_file(\n            access_token=fs_access_token,\n            source_file_path=new_file_path,\n            destination_file_path=recycle_bin_path\n        )\n        print(f\"Moved {new_file_path} to {recycle_bin_path}: {move_result}\")"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "8bef1b5c2d689a7b7e395c60e661811ffb30ea4b06e6cc3c521f03032142c75a"
+    },
+    {
+      "run_id": "a39172ec290d4f62bc24b83b9bea0518",
+      "task_id": "aa8502b_1",
+      "architecture": "recmem",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 42,
+      "memory_version": "de240499382e7fc5bfb7374c4673c77fbc4456baa3917ccbec2905db86f447e9",
+      "sdk_requests": 45,
+      "generation_requests": 18,
+      "known_estimated_usd": 0.06218645,
+      "unknown_cost_requests": 0,
+      "task_seconds": 36.8862000000081,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nspotify_password = next(account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"spotify\")\nlogin_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nspotify_access_token = login_result['access_token']\nprint(spotify_access_token)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='spotify'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='show_liked_songs'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "liked_songs = []\npage_index = 0\nwhile True:\n    response = apis.spotify.show_liked_songs(access_token=spotify_access_token, page_index=page_index)\n    if not response:\n        break\n    liked_songs.extend(response)\n    page_index += 1\nprint(f\"Found {len(liked_songs)} liked songs.\")"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "artist_ids = set()\nfor song in liked_songs:\n    for artist in song['artists']:\n        artist_ids.add(artist['id'])\nprint(f\"Found {len(artist_ids)} unique artists.\")"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='follow_artist'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "followed_artists_count = 0\nfor artist_id in artist_ids:\n    response = apis.spotify.follow_artist(access_token=spotify_access_token, artist_id=artist_id)\n    if response and response.get('message') == 'Artist followed successfully.':\n        followed_artists_count += 1\nprint(f\"Followed {followed_artists_count} artists.\")"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "followed_artists_count = 0\nfor artist_id in artist_ids:\n    try:\n        response = apis.spotify.follow_artist(access_token=spotify_access_token, artist_id=artist_id)\n        if response and response.get('message') == 'Artist followed successfully.':\n            followed_artists_count += 1\n    except Exception as e:\n        if \"You are already following this artist.\" in str(e):\n            print(f\"Artist {artist_id} is already followed. Skipping.\")\n        else:\n            print(f\"An unexpected error occurred while following artist {artist_id}: {e}\")\n\nprint(f\"Successfully followed {followed_artists_count} new artists.\")"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "100dfe68ca712b4c27fa2cadb95c799062d24dd1c0741213e72d3d7d5cf952be"
+    },
+    {
+      "run_id": "a6d57a79494d4fa18ffad8eae8fb29ef",
+      "task_id": "6bdbc26_1",
+      "architecture": "gepa",
+      "phase": "selection",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 8,
+      "memory_version": "710879e58e2603491357d1c08e8f51e55384c64909b8bda4f6eb323b80eba261",
+      "sdk_requests": 32,
+      "generation_requests": 16,
+      "known_estimated_usd": 0.01937009,
+      "unknown_cost_requests": 0,
+      "task_seconds": 23.637805000005756,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nprint(passwords)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "spotify_password = next(item for item in passwords if item[\"account_name\"] == \"spotify\")[\"password\"]\nlogin_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='spotify'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='show_current_song'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "spotify_access_token = login_result[\"access_token\"]\ncurrent_song = apis.spotify.show_current_song(access_token=spotify_access_token)\nprint(current_song)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='show_artist'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "artist_id = current_song[\"artists\"][0][\"id\"]\nartist_details = apis.spotify.show_artist(artist_id=artist_id)\nprint(artist_details)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=artist_details[\"follower_count\"])"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "d98aa1f7c72c950b7809e5150270b25efe9797e00cb19ae163633bec1a5d8a57"
+    },
+    {
+      "run_id": "a82cf17d1e4a4a17963a5b87629717b5",
+      "task_id": "c901732_3",
+      "architecture": "ace",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": false,
+      "appworld_api_calls": 17,
+      "memory_version": "cf8ff1606933a478643eecd07d6760555261d47bb1cb5e9e0c5c022441bb24f1",
+      "sdk_requests": 38,
+      "generation_requests": 26,
+      "known_estimated_usd": 0.03238771,
+      "unknown_cost_requests": 0,
+      "task_seconds": 36.460221000015736,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "login_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nspotify_access_token = login_result['access_token']\nprint(spotify_access_token)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nspotify_password = next(account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"spotify\")\nprint(spotify_password)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "login_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nspotify_access_token = login_result['access_token']\nprint(spotify_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_albums'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "albums = apis.spotify.search_albums(query='The Velvet Underground', access_token=spotify_access_token)\nprint(albums)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "albums = apis.spotify.search_albums(query='The Velvet Underground')\nprint(albums)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='show_album'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "album_details = apis.spotify.show_album(album_id=8)\nprint(album_details)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='show_song'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "album_songs = album_details['songs']\nmost_listened_song = None\nmax_play_count = -1\n\nfor song in album_songs:\n    song_details = apis.spotify.show_song(song_id=song['id'])\n    if song_details['play_count'] > max_play_count:\n        max_play_count = song_details['play_count']\n        most_listened_song = song_details\n\nprint(most_listened_song)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='play_music'))"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "play_result = apis.spotify.play_music(access_token=spotify_access_token, song_id=most_listened_song['song_id'])\nprint(play_result)"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=most_listened_song['title'])"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "602e419c10e8ad04da3fc6082ace72a633477fb512c52447c5b9bc8bf6ef944e"
+    },
+    {
+      "run_id": "b39ce7e3c1ab4acaa68e8b0de40c8058",
+      "task_id": "c901732_3",
+      "architecture": "recmem",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": false,
+      "appworld_api_calls": 15,
+      "memory_version": "05c22ed73c2bf2d43e1e6b65bbd0da010884e7050880dc295cf5f9233d0b44b0",
+      "sdk_requests": 62,
+      "generation_requests": 32,
+      "known_estimated_usd": 0.06298521,
+      "unknown_cost_requests": 0,
+      "task_seconds": 54.764400999993086,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nprint(passwords)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "spotify_password = next(item for item in passwords if item[\"account_name\"] == \"spotify\")[\"password\"]\nlogin_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "spotify_access_token = login_result[\"access_token\"]\nsearch_albums_result = apis.spotify.search_albums(access_token=spotify_access_token, query=\"The Velvet Underground\")\nprint(search_albums_result)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_albums'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "search_albums_result = apis.spotify.search_albums(query=\"The Velvet Underground\")\nprint(search_albums_result)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='spotify'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_artists'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "search_artists_result = apis.spotify.search_artists(query=\"The Velvet Underground\")\nprint(search_artists_result)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_songs'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "search_songs_result = apis.spotify.search_songs(query=\"Velvet Underground\", sort_by=\"-play_count\")\nprint(search_songs_result)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "search_songs_result = apis.spotify.search_songs(query=\"Heroin\")\nprint(search_songs_result)"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "search_albums_result = apis.spotify.search_albums(query=\"The Velvet Underground & Nico\")\nprint(search_albums_result)"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "search_songs_result = apis.spotify.search_songs(query=\"Velvet Underground\", sort_by=\"-play_count\")\nprint(search_songs_result)"
+          ]
+        },
+        {
+          "decision": 14,
+          "python_inputs": [
+            "search_albums_result = apis.spotify.search_albums(query=\"The Velvet Underground - The Velvet Underground\")\nprint(search_albums_result)"
+          ]
+        },
+        {
+          "decision": 15,
+          "python_inputs": [
+            "search_songs_result = apis.spotify.search_songs(query=\"Sweet Jane\")\nprint(search_songs_result)"
+          ]
+        },
+        {
+          "decision": 16,
+          "python_inputs": [
+            "apis.supervisor.complete_task(status=\"fail\", answer=\"Could not find 'The Velvet Underground' album or songs by the band using the available Spotify APIs.\")"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "aaead310df19d38b53195ac694bb64dd9faffadb3f9098b61b65ba0790183d75"
+    },
+    {
+      "run_id": "bcb4acf0042b4939942983bc796620ac",
+      "task_id": "34d9492_1",
+      "architecture": "mem0",
+      "phase": "smoke_exposure",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 96,
+      "memory_version": "f8a9a85b75c6e78dd17af36adf119e5bb30c05eb49bc211bff810f5d762070c9",
+      "sdk_requests": 60,
+      "generation_requests": 24,
+      "known_estimated_usd": 0.043369,
+      "unknown_cost_requests": 0,
+      "task_seconds": 78.66155099996831,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "file_system_password = [account_password[\"account_name\"] == \"file_system\" for account_password in passwords][0][\"password\"]\nfile_system_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nfile_system_access_token = file_system_login_result['access_token']\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = [account_password for account_password in passwords if account_password[\"account_name\"] == \"file_system\"][0][\"password\"]\nfile_system_login_result = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)\nfile_system_access_token = file_system_login_result['access_token']\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_directory'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "vacation_files = apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/', recursive=False, entry_type='files')\nprint(vacation_files)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='show_file'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "from datetime import datetime\n\ncurrent_year = datetime.now().year\nprint(current_year)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='file_system', api_name='create_directory'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "apis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Petra', allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Budapest', allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Amsterdam', allow_if_exists=True)\nprint(\"Directories created.\")"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "from datetime import datetime\n\nfor file_path in vacation_files:\n    file_details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    created_at_str = file_details['created_at']\n    created_at = datetime.fromisoformat(created_at_str)\n\n    destination_directory = \"\"\n    if created_at.year == current_year and created_at.month == 2:\n        destination_directory = \"~/photographs/vacations/Petra\"\n    elif created_at.year == current_year and created_at.month == 3:\n        destination_directory = \"~/photographs/vacations/Budapest\"\n    else:\n        destination_directory = \"~/photographs/vacations/Amsterdam\"\n\n    file_name = file_path.split('/')[-1]\n    destination_file_path = f\"{destination_directory}/{file_name}\"\n\n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file_path, destination_file_path=destination_file_path)\n    print(f\"Moved {file_name} to {destination_directory}\")\n\nprint(\"All files organized.\")"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "dd9d027bbf0b76bc1c734a02bf1b2660ea87d0987b155a85c56470fcd0acd97b"
+    },
+    {
+      "run_id": "be731037d5384d3187b5edb4164fa97e",
+      "task_id": "d0b1f43_1",
+      "architecture": "recmem",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 21,
+      "memory_version": "8d27b2e3378b46965c2466f8c0a75bdf96b55f079026053eb5a971c80e6a4cc0",
+      "sdk_requests": 65,
+      "generation_requests": 26,
+      "known_estimated_usd": 0.07972986,
+      "unknown_cost_requests": 0,
+      "task_seconds": 47.25026999996044,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nvenmo_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"venmo\"), None)\nprint(venmo_password)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "venmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = venmo_login_result['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "venmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = venmo_login_result['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "phone_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"phone\"), None)\nprint(phone_password)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "phone_login_result = apis.phone.login(username='8506051563', password=phone_password)\nphone_access_token = phone_login_result['access_token']\nprint(phone_access_token)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='phone', api_name='search_contacts'))"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "page_index = 0\nroommates = []\nwhile True:\n    roommate_page = apis.phone.search_contacts(access_token=phone_access_token, relationship='roommate', page_index=page_index)\n    if roommate_page:\n        roommates.extend(roommate_page)\n        page_index += 1\n    else:\n        break\nroommate_emails = [roommate['email'] for roommate in roommates]\nprint(roommate_emails)"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_transactions'))"
+          ]
+        },
+        {
+          "decision": 12,
+          "python_inputs": [
+            "from datetime import datetime\n\ncurrent_year = datetime.now().year\ntotal_sent_to_roommates = 0.0\n\nfor roommate_email in roommate_emails:\n    page_index = 0\n    while True:\n        transactions_page = apis.venmo.show_transactions(\n            access_token=venmo_access_token,\n            user_email=roommate_email,\n            min_created_at=f'{current_year}-01-01',\n            direction='sent',\n            page_index=page_index\n        )\n        if transactions_page:\n            for transaction in transactions_page:\n                total_sent_to_roommates += transaction['amount']\n            page_index += 1\n        else:\n            break\n\nprint(total_sent_to_roommates)"
+          ]
+        },
+        {
+          "decision": 13,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=total_sent_to_roommates)"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "35f874ac2d9cf1664b6a4746fbe833349a883e39d721fbfde39e8d175efd65b9"
+    },
+    {
+      "run_id": "c5279453297447449d23c7b9de8fab2a",
+      "task_id": "e85d92a_3",
+      "architecture": "recmem",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": false,
+      "appworld_api_calls": 4,
+      "memory_version": "be10922ac3a6ad0ef7566747e3198ca5837e5bc1ccf5ca10039eb9795c1bf211",
+      "sdk_requests": 19,
+      "generation_requests": 8,
+      "known_estimated_usd": 0.0222454,
+      "unknown_cost_requests": 0,
+      "task_seconds": 24.503673000028357,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nspotify_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"spotify\"), None)\nlogin_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "spotify_access_token = \"[AUTH REDACTED]\"\nsongs = apis.spotify.search_songs(access_token=spotify_access_token, query=\"Jasper Skye\", sort_by=\"-play_count\", page_limit=1)\nprint(songs)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "songs = apis.spotify.search_songs(query=\"Jasper Skye\", sort_by=\"-play_count\", page_limit=1)\nprint(songs)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=\"Swept Away\")"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "de93eeb1360f5c481ddfe5120cac65698a647af880cef195dfa2f7b408e12be1"
+    },
+    {
+      "run_id": "c65e42f0ee75471db7acd0208a1d9194",
+      "task_id": "c901732_3",
+      "architecture": "mem0",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": false,
+      "appworld_api_calls": 11,
+      "memory_version": "9e8270d27bcdcdc56050785efaf2a3c0b6eb0976d98a53b162ae5226aeea6661",
+      "sdk_requests": 42,
+      "generation_requests": 22,
+      "known_estimated_usd": 0.02952452,
+      "unknown_cost_requests": 0,
+      "task_seconds": 56.84600000001956,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nprint(passwords)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "spotify_password = next(item for item in passwords if item[\"account_name\"] == \"spotify\")[\"password\"]\nlogin_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nprint(login_result)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "spotify_access_token = login_result[\"access_token\"]\nprint(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_albums'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "albums = apis.spotify.search_albums(query=\"The Velvet Underground\")\nprint(albums)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "albums = apis.spotify.search_albums(query=\"The Velvet Underground\")\nprint(albums)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='spotify'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_artists'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "artists = apis.spotify.search_artists(query=\"The Velvet Underground\")\nprint(artists)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_songs'))"
+          ]
+        },
+        {
+          "decision": 10,
+          "python_inputs": [
+            "songs = apis.spotify.search_songs(query=\"The Velvet Underground\", sort_by=\"-play_count\")\nprint(songs)"
+          ]
+        },
+        {
+          "decision": 11,
+          "python_inputs": [
+            "apis.supervisor.complete_task(status=\"fail\", answer=\"Could not find 'The Velvet Underground' album or artist on Spotify.\")"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "37d2368a851121d5122c894e8e813c8b2d3ef310b6722fd37a2d4d507bf02e9e"
+    },
+    {
+      "run_id": "d00de637d6ec440cab29880cc7fb43b6",
+      "task_id": "e85d92a_3",
+      "architecture": "ace",
+      "phase": "practice",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 9,
+      "memory_version": "5d9e853381dcc99eaead9facfbe0a8b3449bb007fa25af8e388d6ac03757c3f3",
+      "sdk_requests": 31,
+      "generation_requests": 16,
+      "known_estimated_usd": 0.026736399999999997,
+      "unknown_cost_requests": 0,
+      "task_seconds": 39.823268999985885,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "spotify_password = \"[AUTH REDACTED]\"\nlogin_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nspotify_access_token = login_result['access_token']\nprint(spotify_access_token)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nspotify_password = next(item for item in passwords if item[\"account_name\"] == \"spotify\")[\"password\"]\nlogin_result = apis.spotify.login(username='[EMAIL REDACTED]', password=spotify_password)\nspotify_access_token = login_result['access_token']\nprint(spotify_access_token)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='spotify'))"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_artists'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "artists = apis.spotify.search_artists(query='Jasper Skye')\nprint(artists)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='spotify', api_name='search_songs'))"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "songs = apis.spotify.search_songs(artist_id=3, sort_by='-play_count', page_limit=1)\nprint(songs)"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "apis.supervisor.complete_task(answer=\"Chasing Echoes in the Rain\")"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "ac4d368844773a5e1d71345a0f04a7edd6890d3ae158dbd9d6009abdafb23655"
+    },
+    {
+      "run_id": "ddf04a52bfb948f0982f52b3d3dc799d",
+      "task_id": "34d9492_1",
+      "architecture": "recmem",
+      "phase": "smoke_exposure",
+      "status": "conclusive",
+      "official_success": true,
+      "appworld_api_calls": 92,
+      "memory_version": "94ded28553131f7a7364feff188fd046d38a20f2439e8f0dc5c509709da4793b",
+      "sdk_requests": 45,
+      "generation_requests": 18,
+      "known_estimated_usd": 0.0558738,
+      "unknown_cost_requests": 0,
+      "task_seconds": 37.05730599997332,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nfile_system_password = next(account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"file_system\")\nprint(file_system_password)"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "file_system_access_token = apis.file_system.login(username='[EMAIL REDACTED]', password=file_system_password)['access_token']\nprint(file_system_access_token)"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "vacation_photos = apis.file_system.show_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/', entry_type='files', recursive=False)\nprint(vacation_photos)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "file_details = []\nfor file_path in vacation_photos:\n    details = apis.file_system.show_file_details(access_token=file_system_access_token, file_path=file_path)\n    file_details.append(details)\nprint(file_details)"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='file_system'))"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "file_details = []\nfor file_path in vacation_photos:\n    details = apis.file_system.show_file(access_token=file_system_access_token, file_path=file_path)\n    file_details.append(details)\nprint(file_details)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "apis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Petra', allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Budapest', allow_if_exists=True)\napis.file_system.create_directory(access_token=file_system_access_token, directory_path='~/photographs/vacations/Amsterdam', allow_if_exists=True)\nprint(\"Directories created.\")"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "from datetime import datetime\n\nfor file in file_details:\n    created_at = datetime.fromisoformat(file['created_at'])\n    file_name = file['path'].split('/')[-1]\n    destination_path = ''\n\n    if created_at.year == 2023 and created_at.month == 2:\n        destination_path = f'~/photographs/vacations/Petra/{file_name}'\n    elif created_at.year == 2023 and created_at.month == 3:\n        destination_path = f'~/photographs/vacations/Budapest/{file_name}'\n    else:\n        destination_path = f'~/photographs/vacations/Amsterdam/{file_name}'\n    \n    apis.file_system.move_file(access_token=file_system_access_token, source_file_path=file['path'], destination_file_path=destination_path)\n\nprint(\"Files organized successfully.\")"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "ac982f1d929b921b2711dcbb166e87f35538606088547b915acb59705c69679e"
+    },
+    {
+      "run_id": "e55b28c8f62f4b53aca9e26f3d133883",
+      "task_id": "4fab96f_2",
+      "architecture": "gepa",
+      "phase": "selection",
+      "status": "conclusive",
+      "official_success": false,
+      "appworld_api_calls": 43,
+      "memory_version": "710879e58e2603491357d1c08e8f51e55384c64909b8bda4f6eb323b80eba261",
+      "sdk_requests": 35,
+      "generation_requests": 18,
+      "known_estimated_usd": 0.0442993,
+      "unknown_cost_requests": 0,
+      "task_seconds": 29.5513149999897,
+      "actions": [
+        {
+          "decision": 1,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_descriptions(app_name='venmo'))"
+          ]
+        },
+        {
+          "decision": 2,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='login'))"
+          ]
+        },
+        {
+          "decision": 3,
+          "python_inputs": [
+            "passwords = apis.supervisor.show_account_passwords()\nvenmo_password = next((account_password[\"password\"] for account_password in passwords if account_password[\"account_name\"] == \"venmo\"), None)\nvenmo_login_result = apis.venmo.login(username='[EMAIL REDACTED]', password=venmo_password)\nvenmo_access_token = venmo_login_result['access_token']\nprint(venmo_access_token)"
+          ]
+        },
+        {
+          "decision": 4,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='show_sent_payment_requests'))"
+          ]
+        },
+        {
+          "decision": 5,
+          "python_inputs": [
+            "page_index = 0\npending_payment_requests = []\nwhile True:\n    response = apis.venmo.show_sent_payment_requests(access_token=venmo_access_token, status='pending', page_index=page_index)\n    if response:\n        pending_payment_requests.extend(response)\n        page_index += 1\n    else:\n        break\n\nprint(pending_payment_requests)"
+          ]
+        },
+        {
+          "decision": 6,
+          "python_inputs": [
+            "from datetime import datetime, timedelta\n\ncurrent_time = datetime.now()\nold_payment_requests = []\n\nfor request in pending_payment_requests:\n    created_at = datetime.fromisoformat(request['created_at'])\n    if (current_time - created_at) >= timedelta(days=40):\n        old_payment_requests.append(request)\n\nprint(old_payment_requests)"
+          ]
+        },
+        {
+          "decision": 7,
+          "python_inputs": [
+            "print(apis.api_docs.show_api_doc(app_name='venmo', api_name='remind_payment_request'))"
+          ]
+        },
+        {
+          "decision": 8,
+          "python_inputs": [
+            "for request in old_payment_requests:\n    print(f\"Sending reminder for payment request ID: {request['payment_request_id']}\")\n    response = apis.venmo.remind_payment_request(access_token=venmo_access_token, payment_request_id=request['payment_request_id'])\n    print(response)"
+          ]
+        },
+        {
+          "decision": 9,
+          "python_inputs": [
+            "apis.supervisor.complete_task()"
+          ]
+        }
+      ],
+      "private_source_run_record_sha256": "ea2c5de349c86bd1d327c54be0d863ee0b5f67d77cf6ea4fafe5a41a3bcf740e"
+    }
+  ]
+}

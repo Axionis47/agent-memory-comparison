@@ -1,0 +1,37 @@
+{
+  "id": "MC01",
+  "version": 2,
+  "seed": "memory-appworld-v1",
+  "arms": [
+    "baseline",
+    "mem0",
+    "ace",
+    "trace2skill",
+    "gepa",
+    "recmem"
+  ],
+  "train_tasks": 6,
+  "selection_tasks": 2,
+  "evaluation_tasks": 6,
+  "repetitions": 2,
+  "project": "YOUR_GOOGLE_CLOUD_PROJECT",
+  "location": "global",
+  "model": "gemini-2.5-flash",
+  "embedding_model": "gemini-embedding-001",
+  "embedding_dimension": 1536,
+  "temperature": 0,
+  "thinking_budget": 0,
+  "max_output_tokens": 16384,
+  "max_steps_watchdog": 60,
+  "gepa_metric_calls": 12,
+  "memory_tokens": 8192,
+  "estimated_cost_guard_usd": 30,
+  "pricing": {
+    "checked": "2026-10-18",
+    "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    "input_per_million": 0.3,
+    "cached_input_per_million": 0.03,
+    "output_per_million": 2.5,
+    "embedding_per_million": 0.15
+  }
+}

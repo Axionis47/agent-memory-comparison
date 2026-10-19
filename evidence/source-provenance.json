@@ -1,0 +1,74 @@
+{
+  "source_snapshot_date": "2026-10-19",
+  "original_source_sha256": {
+    "mc/__init__.py": "ed6e61fa72d85f2132e20fbc365ffa74c82fef4352c1a9198f47fac68fd17968",
+    "mc/__main__.py": "e3de4274bfefa43cf20c4196fc825d787473796340c58803cf024e5a234bb90d",
+    "mc/agent.py": "80350d923e3221b6203fdb055d8d1b202372f368c8b662117cdab02487fe94b3",
+    "mc/audit.py": "621ed148c5318f54c44db34b99ef4703647ce40f78a67bc441707873e2c071f3",
+    "mc/core.py": "7a00e953a86cb65e1c59e7324d6fafed36dff64237df7aff314fe1e722f7b716",
+    "mc/grading.py": "4fde487cf5a44db2f3db0b550f4f674c8803122685ac28dae5cf005ac7a73fac",
+    "mc/memory.py": "6fbbb0316fd0e73e8970ac9c88cf21b139c5742009925012820a131942a197d9",
+    "mc/provider.py": "b2fcd95d778ad8d1b4f8bb737518d633f78722909309dfb70dd5c9b8f0a48dc3",
+    "mc/report.py": "381b0c39252222eac31da23344a01ea6b85e509cbc407378cee1e7982a606c97",
+    "growth/__init__.py": "d8ddc09e54f9f86928f07ec6d0852b9e80915db534111e213a78e0ae4cd837dd",
+    "growth/__main__.py": "86cd07aa46c24f18014de099e9952b8a872598523c653228f68f40c269ad9f4b",
+    "growth/agent.py": "9747f8c2a48f826ca267f04ee3a610cfe1a687be7eb6616c1ff10878ba108237",
+    "growth/measure.py": "9316b777ddf5343409803db234fe7374a820450bc316c13e546868add19bd539",
+    "growth/memory.py": "0bb927a67df0497d75e25ce28ae7c408d1c89b1f5494ba8930e796cb9e3f5977",
+    "growth/provider.py": "49d88c138e72e6da041602e1bfe4852839b3537d1e63ff6d31ddb70a4dd07b0a",
+    "growth/runtime.py": "871c4535929ccf8b3c63e5ff085a110e231fd180b2e912664cd0556702793e71",
+    "growth/tools.py": "8d0c2a619a1d9094ea3d4ac16446bca34350176e385af9e9fc11683351a5e6cb",
+    "tests/test_contracts.py": "2a01a0e43ec01fccc87f313d0aba5d2296de379fa0397789e40e11785b15bf07",
+    "growth/tests/__init__.py": "9f0a20ce5185741c39cd20f78786a552af3b89da76371c6daa93c21f6deb6ac0",
+    "growth/tests/test_contracts.py": "ba8346df2e606b5694295351c3c08741f031030b46bd6d92afd0e1c98e88dd81",
+    "bootstrap.py": "143405624113d21ce83d33d1b1a7720a47d7dcb57c6f135778021e231a22d008",
+    "pilot.py": "7c6177543e806dccece83e59ab661e230869a5252e9ac177cf84fce49943e4f2",
+    "gepa_retention.py": "132020c530c8eba0da44e1a61e6c49d471bf810b53ffb5a437984c7acd99d965",
+    "requirements.lock": "4f2b7d4cdcfd6e39c03152baeff2c27f954df3a670dcd495b64a28a29826e9de",
+    "EXPERIMENT.md": "b48e3cf0761574cdb7e5a6c850d5c56827ae77e5ad517d32a4bfb800048ac07a",
+    "FIDELITY.md": "656a97444c7348a8d0f70c9f0a01de26829d4b49fc2340b60d36ecddd797eca7",
+    "growth/EXPERIMENT.md": "33f3ba6d71730c119a8d7f0d8ef82e1adc20220d153dfbd743bc39825e8cebb5",
+    "protocol.json": "64ce7303dda2af82fd35d5b680ca451858bd8720aa0c95cc6443c21092d3acbf",
+    "growth-protocol.json": "f8d28299a5c62abd320c6fd47f277ace48afa86d9260e0ca19511417f9c5536d"
+  },
+  "publication_projection_changes": [
+    "protocol.json",
+    "growth-protocol.json",
+    "EXPERIMENT.md",
+    "growth/EXPERIMENT.md"
+  ],
+  "projection_notes": [
+    "Cloud project identity replaced by a configuration placeholder.",
+    "Public documentation describes only executed work. Original protocols, plans and frozen evidence remain preserved locally.",
+    "Planned population exports and private postprocessing tools are not included. Original bootstrap source is unchanged."
+  ],
+  "upstream_sources": {
+    "appworld": {
+      "commit": "42b5bcf3cd334fee33f0c37c02070a9f5807add5",
+      "injected_agent_hash": "df814b22616ea17c878a77e3974881bb826c201fe00ce9e4511d9ffb7ea7f441"
+    },
+    "ace": {
+      "commit": "82709de050e1db6e6ef2f07bcb0393560b94992a"
+    },
+    "trace2skill": {
+      "commit": "3d0b52a140f002a512930252b613c49048f7d5ac"
+    },
+    "recmem": {
+      "commit": "a84252f6e5587fd4a8caac03ec9f6c732b7a7f35"
+    }
+  },
+  "local_software_checks": {
+    "command": ".venv/bin/python -m pytest tests growth/tests -q",
+    "passed": 35,
+    "warnings": 5,
+    "scope": "Original local source and installed runtime, no fresh provider or benchmark calls. Not a clean-install test."
+  },
+  "original_growth_report_sha256": "f8612ccb075ff6e23ebd78c2b00b17c34811021771f724a8507161de9aeaeb75",
+  "original_private_bundle_sha256": "fa8483ea3dd2be7572d44d5da234689c9d25fe06a66878a9cadce6f116c408c1",
+  "public_snapshot_software_checks": {
+    "command": "python -m pytest tests -q",
+    "passed": 16,
+    "warnings": 5,
+    "scope": "Publication source using original installed local dependencies. No model calls and no fresh-install claim."
+  }
+}

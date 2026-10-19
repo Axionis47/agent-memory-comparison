@@ -1,0 +1,15 @@
+.cache/
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.env
+.env.*
+!.env.example
+results/
+*.sqlite*
+*.db
+*.tar.gz
+*.zip
+credentials*.json
+application_default_credentials.json
