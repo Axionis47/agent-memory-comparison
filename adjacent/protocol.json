@@ -1,0 +1,475 @@
+{
+  "id": "MA01",
+  "version": 1,
+  "status": "planned",
+  "execution_freeze": false,
+  "created_at_utc": "2026-10-20T20:02:42.096527+00:00",
+  "seed": "memory-adjacent-v1",
+  "question": "Does native consolidation make identical adjacent-task experience more useful to the same acting agent?",
+  "independent_variable": "memory representation: none, raw, native RecMem consolidated",
+  "primary_contrast": [
+    "consolidated",
+    "raw"
+  ],
+  "secondary_contrasts": [
+    [
+      "raw",
+      "none"
+    ],
+    [
+      "consolidated",
+      "none"
+    ]
+  ],
+  "population_selection": "Deliberate public-instruction-based adjacent family selection before outcomes; not a random benchmark sample.",
+  "practice_tasks": [
+    {
+      "task_id": "afc0fce_1",
+      "scenario_group": "afc0fce",
+      "split": "train",
+      "instruction": "Add a comment, \"Thank you!\", to all the venmo payments I received from my coworkers in the last 5 days (including today), and like those payments.",
+      "instruction_sha256": "2b1127911151dd1e34ed76e403c1109b09a26be2a41769650c880141d85e2166",
+      "spec_file_sha256": "38695334c722a78e7f85b0feb1e886bbea001a20bc65191f410fd5a9db8a4b38",
+      "db_version": "0.2.0"
+    },
+    {
+      "task_id": "afc0fce_2",
+      "scenario_group": "afc0fce",
+      "split": "train",
+      "instruction": "Add a comment, \"Thanks!\", to all the venmo payments I received from my friends in the last 7 days (including today), and like those payments.",
+      "instruction_sha256": "d99b46f9a29841708d0d9194851b835a4b6551e6e10fe19a64fc1033416621fb",
+      "spec_file_sha256": "f874a080953c3a04db0b62a75bbaed26d507a7d5d7776f1e0e6a7207a571f911",
+      "db_version": "0.2.0"
+    },
+    {
+      "task_id": "afc0fce_3",
+      "scenario_group": "afc0fce",
+      "split": "train",
+      "instruction": "Add a comment, \"Thank you so much!\", to all the venmo payments I received from my roommates in the last 10 days (including today), and like those payments.",
+      "instruction_sha256": "d6d370f6b670228688ef5ab5ae727db0e93e1fc9abba619c6213db01406e8023",
+      "spec_file_sha256": "611aa48573e99ffc2ad5380376b7ecef103810734f1597b35367a016e60026fe",
+      "db_version": "0.2.0"
+    }
+  ],
+  "evaluation_tasks": [
+    {
+      "task_id": "df61dc5_1",
+      "scenario_group": "df61dc5",
+      "split": "dev",
+      "instruction": "Like all the venmo transactions of the ongoing year to and from my roommates.",
+      "instruction_sha256": "2a0884f24241912d8884e5f96f9a6e38e5fa07ea3093231035efd3bb27a83087",
+      "spec_file_sha256": "f5b3b68b83c7ae5a1b99dac8d3867d24346a01e7bd6126b38770e932e2ad5f77",
+      "db_version": "0.2.0"
+    },
+    {
+      "task_id": "df61dc5_2",
+      "scenario_group": "df61dc5",
+      "split": "dev",
+      "instruction": "Like all the venmo transactions of the ongoing month to and from my friends.",
+      "instruction_sha256": "4f6be28060a4ca67ccf105f3539efbdd2eb7432f1bf3cadb6b66c63ab97d2e49",
+      "spec_file_sha256": "4e8e57c993eac57f841a6a15b7a237df6942a02d960f31b75ae605876f95c9dd",
+      "db_version": "0.2.0"
+    },
+    {
+      "task_id": "df61dc5_3",
+      "scenario_group": "df61dc5",
+      "split": "dev",
+      "instruction": "Like all the venmo transactions of the ongoing year to and from my coworkers.",
+      "instruction_sha256": "47b11a5b32f81665992a364b4387c30630c264be65ac31b50775b00a36ec335c",
+      "spec_file_sha256": "7ab507dd30683ed8beb55d52f06537e81f28d39b8a08fcd963644b6dcdf57564",
+      "db_version": "0.2.0"
+    }
+  ],
+  "prior_use_audit": {
+    "sql": "SELECT id, task_id, phase, status FROM runs WHERE task_id GLOB ? OR task_id GLOB ? ORDER BY id",
+    "parameters": [
+      "afc0fce_*",
+      "df61dc5_*"
+    ],
+    "checked_at_utc": "2026-10-20T20:02:42.096600+00:00",
+    "ledgers": [
+      {
+        "ledger": "results/ledger.sqlite",
+        "matching_attempts": 0,
+        "matching_records": []
+      },
+      {
+        "ledger": "results/growth-v1/ledger.sqlite",
+        "matching_attempts": 0,
+        "matching_records": []
+      },
+      {
+        "ledger": "results/growth-v2/ledger.sqlite",
+        "matching_attempts": 0,
+        "matching_records": []
+      },
+      {
+        "ledger": "results/growth-v3/ledger.sqlite",
+        "matching_attempts": 0,
+        "matching_records": []
+      }
+    ],
+    "scope": "Actual recorded attempts, including incomplete attempts. Planned assignments do not count as attempts."
+  },
+  "sources": {
+    "appworld": "42b5bcf3cd334fee33f0c37c02070a9f5807add5",
+    "recmem": "a84252f6e5587fd4a8caac03ec9f6c732b7a7f35"
+  },
+  "task_data_version": "0.2.0",
+  "api_catalogue_sha256": "d40ae20e4a4581a60770564eaa76593538586f3171ee61a5afb0b74bcffc4ecf",
+  "upstream_agent": "SimplifiedReActCodeAgent",
+  "model_settings_proposed": {
+    "project": "YOUR_GOOGLE_CLOUD_PROJECT",
+    "location": "global",
+    "model": "gemini-2.5-flash",
+    "embedding_model": "gemini-embedding-001",
+    "embedding_dimension": 1536,
+    "temperature": 0,
+    "thinking_budget": 0,
+    "max_output_tokens": 16384,
+    "tool_search_limit": 8,
+    "tool_definition_tokens": 8192
+  },
+  "resolved_model_version": null,
+  "provider_context_capacity_verified": false,
+  "generation_output_mode": "live only",
+  "experience": {
+    "practice_condition": "none",
+    "attempts_per_task": 1,
+    "shared_corpus_sha256": null,
+    "all_outcomes_retained": true,
+    "units": [
+      "one task-start unit",
+      "one unit per distinct executed action and observation",
+      "one actual completion and separate official feedback unit"
+    ],
+    "order": "practice task order, then original action order",
+    "arrival_replay_or_manufactured_recurrence": false,
+    "secret_removal": "Required in learning copies; original evidence remains private. No expected private values or reference solutions."
+  },
+  "conditions": {
+    "none": {
+      "retained_memory": false
+    },
+    "raw": {
+      "construction": "native SubconsciousMemory.add; bypass all consolidation and merging",
+      "higher_layers_empty": true
+    },
+    "consolidated": {
+      "construction": "native RecMem.add_memory",
+      "min_consolidation_cnt": 6,
+      "min_relevant_score": 0.7,
+      "merge_with_epi_thresh": 0.75,
+      "semantic_refinement": true
+    }
+  },
+  "main_context": {
+    "selection_mode": "full-context exposure",
+    "all_items_supplied": true,
+    "action_exposure": true,
+    "tool_search_exposure": true,
+    "top_k": null,
+    "memory_clipping": false,
+    "fit_policy": "Verify full initial requests against provider capacity. Do not drop memory. Later context overflow is operationally inconclusive.",
+    "handwritten_lessons": false,
+    "read_only_during_evaluation": true
+  },
+  "checkpoint_after_practice_tasks": [
+    1,
+    2,
+    3
+  ],
+  "checkpoint_purpose": "content, mutations, lineage, footprint and read-only probes; final checkpoint only for task evaluations",
+  "retrieval_audit": {
+    "affects_main_context": false,
+    "queries": "Already-seen practice instructions and first observed error per task at each checkpoint; public evaluation instructions at final freeze, without answers or grades.",
+    "native_path": "RecMem.search_memories on both stores; capture point identities before public API discards them",
+    "native_limits": {
+      "raw": 10,
+      "episodic": 5,
+      "semantic": 10,
+      "semantic_threshold": 0
+    },
+    "common_diagnostic": "Derived exact-cosine Qdrant view; all scores sorted descending then immutable ID; retain ten whole items",
+    "applicability_labels": [
+      "applicable procedure",
+      "historical fact needing fresh lookup",
+      "conflicting condition",
+      "unrelated",
+      "ambiguous"
+    ],
+    "source_linkage_is_not_usefulness": true,
+    "no_query_tuning": true
+  },
+  "evaluation": {
+    "repetitions": 3,
+    "planned_cells": 27,
+    "planned_cells_per_condition": 9,
+    "shared_practice_attempts": 3,
+    "order_rule": "For task index and repetition indexed from zero, left-rotate [none, raw, consolidated] by (task_index + repetition) % 3.",
+    "serial_model_requests": true,
+    "fresh_world_and_history": true,
+    "official_evaluator": true,
+    "cells": [
+      {
+        "cell_id": "MA01-df61dc5_1-r0-none",
+        "task_id": "df61dc5_1",
+        "repetition": 0,
+        "condition": "none",
+        "position_in_triplet": 0,
+        "dispatch_order": 1
+      },
+      {
+        "cell_id": "MA01-df61dc5_1-r0-raw",
+        "task_id": "df61dc5_1",
+        "repetition": 0,
+        "condition": "raw",
+        "position_in_triplet": 1,
+        "dispatch_order": 2
+      },
+      {
+        "cell_id": "MA01-df61dc5_1-r0-consolidated",
+        "task_id": "df61dc5_1",
+        "repetition": 0,
+        "condition": "consolidated",
+        "position_in_triplet": 2,
+        "dispatch_order": 3
+      },
+      {
+        "cell_id": "MA01-df61dc5_2-r0-raw",
+        "task_id": "df61dc5_2",
+        "repetition": 0,
+        "condition": "raw",
+        "position_in_triplet": 0,
+        "dispatch_order": 4
+      },
+      {
+        "cell_id": "MA01-df61dc5_2-r0-consolidated",
+        "task_id": "df61dc5_2",
+        "repetition": 0,
+        "condition": "consolidated",
+        "position_in_triplet": 1,
+        "dispatch_order": 5
+      },
+      {
+        "cell_id": "MA01-df61dc5_2-r0-none",
+        "task_id": "df61dc5_2",
+        "repetition": 0,
+        "condition": "none",
+        "position_in_triplet": 2,
+        "dispatch_order": 6
+      },
+      {
+        "cell_id": "MA01-df61dc5_3-r0-consolidated",
+        "task_id": "df61dc5_3",
+        "repetition": 0,
+        "condition": "consolidated",
+        "position_in_triplet": 0,
+        "dispatch_order": 7
+      },
+      {
+        "cell_id": "MA01-df61dc5_3-r0-none",
+        "task_id": "df61dc5_3",
+        "repetition": 0,
+        "condition": "none",
+        "position_in_triplet": 1,
+        "dispatch_order": 8
+      },
+      {
+        "cell_id": "MA01-df61dc5_3-r0-raw",
+        "task_id": "df61dc5_3",
+        "repetition": 0,
+        "condition": "raw",
+        "position_in_triplet": 2,
+        "dispatch_order": 9
+      },
+      {
+        "cell_id": "MA01-df61dc5_1-r1-raw",
+        "task_id": "df61dc5_1",
+        "repetition": 1,
+        "condition": "raw",
+        "position_in_triplet": 0,
+        "dispatch_order": 10
+      },
+      {
+        "cell_id": "MA01-df61dc5_1-r1-consolidated",
+        "task_id": "df61dc5_1",
+        "repetition": 1,
+        "condition": "consolidated",
+        "position_in_triplet": 1,
+        "dispatch_order": 11
+      },
+      {
+        "cell_id": "MA01-df61dc5_1-r1-none",
+        "task_id": "df61dc5_1",
+        "repetition": 1,
+        "condition": "none",
+        "position_in_triplet": 2,
+        "dispatch_order": 12
+      },
+      {
+        "cell_id": "MA01-df61dc5_2-r1-consolidated",
+        "task_id": "df61dc5_2",
+        "repetition": 1,
+        "condition": "consolidated",
+        "position_in_triplet": 0,
+        "dispatch_order": 13
+      },
+      {
+        "cell_id": "MA01-df61dc5_2-r1-none",
+        "task_id": "df61dc5_2",
+        "repetition": 1,
+        "condition": "none",
+        "position_in_triplet": 1,
+        "dispatch_order": 14
+      },
+      {
+        "cell_id": "MA01-df61dc5_2-r1-raw",
+        "task_id": "df61dc5_2",
+        "repetition": 1,
+        "condition": "raw",
+        "position_in_triplet": 2,
+        "dispatch_order": 15
+      },
+      {
+        "cell_id": "MA01-df61dc5_3-r1-none",
+        "task_id": "df61dc5_3",
+        "repetition": 1,
+        "condition": "none",
+        "position_in_triplet": 0,
+        "dispatch_order": 16
+      },
+      {
+        "cell_id": "MA01-df61dc5_3-r1-raw",
+        "task_id": "df61dc5_3",
+        "repetition": 1,
+        "condition": "raw",
+        "position_in_triplet": 1,
+        "dispatch_order": 17
+      },
+      {
+        "cell_id": "MA01-df61dc5_3-r1-consolidated",
+        "task_id": "df61dc5_3",
+        "repetition": 1,
+        "condition": "consolidated",
+        "position_in_triplet": 2,
+        "dispatch_order": 18
+      },
+      {
+        "cell_id": "MA01-df61dc5_1-r2-consolidated",
+        "task_id": "df61dc5_1",
+        "repetition": 2,
+        "condition": "consolidated",
+        "position_in_triplet": 0,
+        "dispatch_order": 19
+      },
+      {
+        "cell_id": "MA01-df61dc5_1-r2-none",
+        "task_id": "df61dc5_1",
+        "repetition": 2,
+        "condition": "none",
+        "position_in_triplet": 1,
+        "dispatch_order": 20
+      },
+      {
+        "cell_id": "MA01-df61dc5_1-r2-raw",
+        "task_id": "df61dc5_1",
+        "repetition": 2,
+        "condition": "raw",
+        "position_in_triplet": 2,
+        "dispatch_order": 21
+      },
+      {
+        "cell_id": "MA01-df61dc5_2-r2-none",
+        "task_id": "df61dc5_2",
+        "repetition": 2,
+        "condition": "none",
+        "position_in_triplet": 0,
+        "dispatch_order": 22
+      },
+      {
+        "cell_id": "MA01-df61dc5_2-r2-raw",
+        "task_id": "df61dc5_2",
+        "repetition": 2,
+        "condition": "raw",
+        "position_in_triplet": 1,
+        "dispatch_order": 23
+      },
+      {
+        "cell_id": "MA01-df61dc5_2-r2-consolidated",
+        "task_id": "df61dc5_2",
+        "repetition": 2,
+        "condition": "consolidated",
+        "position_in_triplet": 2,
+        "dispatch_order": 24
+      },
+      {
+        "cell_id": "MA01-df61dc5_3-r2-raw",
+        "task_id": "df61dc5_3",
+        "repetition": 2,
+        "condition": "raw",
+        "position_in_triplet": 0,
+        "dispatch_order": 25
+      },
+      {
+        "cell_id": "MA01-df61dc5_3-r2-consolidated",
+        "task_id": "df61dc5_3",
+        "repetition": 2,
+        "condition": "consolidated",
+        "position_in_triplet": 1,
+        "dispatch_order": 26
+      },
+      {
+        "cell_id": "MA01-df61dc5_3-r2-none",
+        "task_id": "df61dc5_3",
+        "repetition": 2,
+        "condition": "none",
+        "position_in_triplet": 2,
+        "dispatch_order": 27
+      }
+    ]
+  },
+  "measures": [
+    "official task completion with planned/eligible/excluded counts",
+    "paired wins, losses, ties and unmatched cells",
+    "unrequested comment attempts versus persisted effects",
+    "API calls and generation/embedding requests",
+    "input/output and supplied-memory tokens",
+    "construction versus execution expense and timing",
+    "repeatability",
+    "raw/episodic/semantic content and storage footprint",
+    "source-bound fidelity and lost conditions",
+    "actual native triggers, changes and source lineage",
+    "query applicability, source reachability and delivered context",
+    "errors, stopping and earliest observable broken boundary",
+    "versions, reset equality and frozen-memory integrity"
+  ],
+  "fidelity_review": {
+    "sample_limit": 10,
+    "selection": "SHA-256(seed + immutable item version), ascending, final changed consolidated items; select before evaluation outcomes",
+    "labels": [
+      "supported",
+      "contradicted",
+      "unsupported",
+      "ambiguous"
+    ],
+    "live_reviewer_required": true,
+    "labels_are_benchmark_truth": false
+  },
+  "version_policy": "Immutable content identities, separately versioned metadata and lineage, API definition hash plus pinned upstream behavior revision. Identical compatibility checks for both memory conditions.",
+  "promotion_retirement_policy": "Not enabled in this comparison; these are unvalidated research exposures. Evaluation cannot promote or update memory.",
+  "operational_policy": "Provider failures stop live dispatch; preserve uncertain requests. Context overflow, provider truncation, watchdogs and request guards are inconclusive for behavioral comparison. Preserve official grades and all costs. Resume only missing or inconclusive cells.",
+  "execution_freeze_pending": [
+    "new cohort implementation/source hashes",
+    "dependency lock and prompt versions",
+    "resolved provider model identity and full-context capacity",
+    "live discarded training-only integration proof",
+    "credential-safe actual shared corpus",
+    "native accepted consolidation or merge and source-probe exposure",
+    "immutable artifacts and full-context renderings",
+    "reset, evaluator, exposure and complete request-accounting verification",
+    "current pricing verification for any estimates"
+  ],
+  "results_namespace": "results/adjacent-v1",
+  "existing_evidence_unchanged": true
+}

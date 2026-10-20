@@ -13,3 +13,8 @@ results/
 *.zip
 credentials*.json
 application_default_credentials.json
+
+# Local historical evidence/runtime links, never published.
+local/
+/.venv
+/results

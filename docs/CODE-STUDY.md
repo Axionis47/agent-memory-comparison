@@ -1,5 +1,7 @@
 # Code study and executed findings
 
+Updated evidence, 2026-10-20: the later [Mem0/ACE repeated checks](MEM0-ACE-DIAGNOSTIC.md) and [Trace2Skill/GEPA/RecMem exposure/removal checks](THREE-MEMORY-DIAGNOSTIC.md) qualify the earlier examples below. They preserve failures and do not establish a reliable quality gain. Their [recorded actions and supplied memory](../evidence/diagnostic-actions.json) are available together. The [memory evolution walkthrough](walkthrough/memory-evolution-steps.html) shows actual updates step by step. The [adjacent-task study](../adjacent/EXPERIMENT.md) is a prospective plan, with no new task executions.
+
 The purpose of this study was to understand five existing memory mechanisms through their code and their behaviour inside a real acting agent. It builds on released implementations from Mem0, ACE, Trace2Skill, GEPA and RecMem, and on AppWorld's existing agent, applications, tasks and evaluator. Those projects supplied the underlying mechanisms and task environment.
 
 The contribution here was the integration and its evidence: mapping actual task experience into each implementation, preserving the meaning of answers and feedback, connecting live model calls, scheduling updates, exposing retained knowledge during action decisions, and tracing the resulting work. This produced a measured pilot, concrete memory-and-action cases, and a selected GEPA instruction that survived persistence and later exposure. It did not establish that every mechanism reliably improves the agent.

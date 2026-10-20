@@ -39,7 +39,22 @@ def main():
             raise SystemExit('JWT-shaped credential found: '+str(path))
         if re.search(r'/(?:Users|var/folders)/',text):
             raise SystemExit('Host-specific personal path found: '+str(path))
+    diagnostic=json.loads((root/'evidence/diagnostic-actions.json').read_text())
+    rows=diagnostic['runs']
+    assert len(rows)==len({r['run_id'] for r in rows})==86
+    assert sum(r['diagnostic']=='memory-effect' for r in rows)==32
+    later=[r for r in rows if r['diagnostic']=='three-memory-effect']
+    assert len(later)==54 and sum(bool(r['comparison_eligible']) for r in later)==53
+    assert all(r['classification']=='live' for r in rows)
+    for row in rows:
+        for decision in row['decisions']:
+            assert all(ref in diagnostic['memory_items'] for ref in decision['exposed_memory_refs'])
+    planned=json.loads((root/'adjacent/protocol.json').read_text())
+    assert planned['status']=='planned' and not planned['execution_freeze']
+    cells=planned['evaluation']['cells']
+    assert len(cells)==len({c['cell_id'] for c in cells})==27
     print(f'Verified {len(manifest["files"])} file identities, {len(cases)} sanitised task records, Python syntax and local documentation links.')
+    print('Also reconciled 86 later diagnostic exports, 53/54 eligible three-memory attempts, context references and 27 planned adjacent-task cells.')
     print('No model calls made. These checks do not independently verify official benchmark outcomes.')
 
 

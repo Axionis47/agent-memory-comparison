@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-20",
+  "purpose": "Consolidate the existing Git repository, newer executed diagnostics, lifecycle extension and proposed adjacent-task study.",
+  "original_source_files": {
+    "memory_effect.py": {
+      "private_source_sha256": "71ef3942850fe9c60876d7b99154eead952b161b1ddab89aaf9e3d23866ef4f8",
+      "published_sha256": "71ef3942850fe9c60876d7b99154eead952b161b1ddab89aaf9e3d23866ef4f8",
+      "projection": "authentication/email/cloud-project redaction only, when present"
+    },
+    "memory_effect_analysis.py": {
+      "private_source_sha256": "2ed8809e8ca0e824de4949b136c8e55ab17dae07d4fd1adda7b822b7ce946cb7",
+      "published_sha256": "2ed8809e8ca0e824de4949b136c8e55ab17dae07d4fd1adda7b822b7ce946cb7",
+      "projection": "authentication/email/cloud-project redaction only, when present"
+    },
+    "memory_three_effect.py": {
+      "private_source_sha256": "6c6ec76f5a78e951b8f6ab85bc3b43ed6dd05c1e7364e4b7d2da37414f794b85",
+      "published_sha256": "6c6ec76f5a78e951b8f6ab85bc3b43ed6dd05c1e7364e4b7d2da37414f794b85",
+      "projection": "authentication/email/cloud-project redaction only, when present"
+    },
+    "memory_three_analysis.py": {
+      "private_source_sha256": "758496d4f57164211c53f5ac6770b8761b1b5f69dda18a88d4ec706c925b134d",
+      "published_sha256": "758496d4f57164211c53f5ac6770b8761b1b5f69dda18a88d4ec706c925b134d",
+      "projection": "authentication/email/cloud-project redaction only, when present"
+    },
+    "memory_lifecycle.py": {
+      "private_source_sha256": "593b2dbfae3ec034bf08733be4f026ddb8c46a0a58d15aa325f37ac4e0089cf5",
+      "published_sha256": "593b2dbfae3ec034bf08733be4f026ddb8c46a0a58d15aa325f37ac4e0089cf5",
+      "projection": "authentication/email/cloud-project redaction only, when present"
+    },
+    "tests/test_memory_lifecycle.py": {
+      "private_source_sha256": "e6bfd70ca9c29daa05134cef7c6f3256cb20f92d88270c767f17f20d20a39448",
+      "published_sha256": "e6bfd70ca9c29daa05134cef7c6f3256cb20f92d88270c767f17f20d20a39448",
+      "projection": "authentication/email/cloud-project redaction only, when present"
+    },
+    "tests/test_memory_three_effect.py": {
+      "private_source_sha256": "b5c6da0ac80822ec37130cf4b49e4d200309436484a8015a310f40c3ba73ad23",
+      "published_sha256": "b5c6da0ac80822ec37130cf4b49e4d200309436484a8015a310f40c3ba73ad23",
+      "projection": "authentication/email/cloud-project redaction only, when present"
+    },
+    "LIFECYCLE.md": {
+      "private_source_sha256": "273f021e393efa8f757bf42ff1492cca10448ae380c5da04be4ff667bd44646d",
+      "published_sha256": "273f021e393efa8f757bf42ff1492cca10448ae380c5da04be4ff667bd44646d",
+      "projection": "authentication/email/cloud-project redaction only, when present"
+    },
+    "growth_evidence.py": {
+      "private_source_sha256": "dbea45160666532a4dfecef290daa6e536fb0f7c2afe0d01f76424f3c53a1f3f",
+      "published_sha256": "b5f0e03fe1167d3cec951c3811550cfcd01b984ec83630a03709b16b7a39db30",
+      "projection": "Machine-specific protected-baseline path becomes MC_PROTECTED_BASELINE environment setting."
+    }
+  },
+  "historical_source_unchanged": true,
+  "historical_ledgers_and_native_stores": "private, excluded from Git",
+  "new_model_calls": 0,
+  "adjacent_study_status": "planned; zero task/model runs",
+  "public_export_notes": [
+    "Recognised actual authentication values, JWTs, email addresses and cloud project identity are redacted.",
+    "Only the Git checkout moved. Historical runtime paths, source, ledgers and native snapshots remain unchanged.",
+    "Public source remains a snapshot requiring runtime configuration and private evidence for historical verification.",
+    "Historical results are accessible only through ignored local/legacy; the new repository has its own results directory for new cohorts."
+  ]
+}
